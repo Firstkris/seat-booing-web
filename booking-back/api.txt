@@ -1,0 +1,13 @@
+### Authentication ### 
+/auth
+POST /auth/register register a new user
+REQUEST
+{
+    firstName   string
+    lastName    string
+    id_number   string
+    email
+    password
+    phone
+    address?  
+}

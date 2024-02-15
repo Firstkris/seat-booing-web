@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  NOTTELL
+}
+
+enum ScheduleStatus {
+  DEPARTED
+  ARRIVED
+  AVAILABLE
+  FULL
+}
+
+model User {
+  id          Int       @id @default(autoincrement())
+  firstName   String    @map("first_name")
+  lastName    String    @map("last_name")
+  idNumber    String    @unique @map("id_number") @db.VarChar(16)
+  email       String    @unique
+  mobile      String    @unique
+  password    String
+  gender      Gender    @default(NOTTELL)
+  birthDate   DateTime? @db.Date()
+  address     String?
+  createAt    DateTime  @default(now()) @map("create_at") @db.Timestamp(0)
+  updateAt    DateTime  @updatedAt @map("update_at") @db.Timestamp(0)
+  paymentInfo String?
+  booking     Booking[]
+
+  @@map("users")
+}
+
+model Booking {
+  id       Int      @id @default(autoincrement())
+  createAt DateTime @default(now()) @map("create_at") @db.Timestamp(0)
+  updateAt DateTime @updatedAt @map("update_at") @db.Timestamp(0)
+  userId   Int      @map("user_id")
+  User     User     @relation(fields: [userId], references: [id])
+
+  bookingDetail BookingDetail[]
+
+  @@map("booking")
+}
+
+model BookingDetail {
+  id Int @id @default(autoincrement())
+
+  booking   Booking @relation(fields: [bookingId], references: [id])
+  bookingId Int     @map("booking_id")
+
+  @@map("booking_detail")
+}
+
+model Schedule {
+  id             Int             @id @default(autoincrement())
+  origin         String
+  destination    String
+  departTime     DateTime        @db.Time()
+  arrivalTime    DateTime        @db.Time()
+  departureDate  DateTime        @db.Date
+  price          Decimal         @db.Decimal()
+  seat_avaliable Int
+  status         ScheduleStatus?
+
+  busId Int @map("bus_id")
+  bus   Bus @relation(fields: [busId], references: [id])
+
+  @@map("schedule")
+}
+
+model Bus {
+  id         Int        @id @default(autoincrement())
+  status     Boolean
+  total_seat Int
+  schedule   Schedule[]
+  seat       Seat[]
+
+  @@map("bus")
+}
+
+model Seat {
+  id        Int     @id @default(autoincrement())
+  status    Boolean
+  seat_code String  @db.VarChar(3)
+  seat_col  String  @db.VarChar(2)
+  seat_row  String  @db.VarChar(2)
+
+  bus   Bus @relation(fields: [busId], references: [id])
+  busId Int @map("busId")
+
+  @@map("seat")
+}
