@@ -5,7 +5,6 @@ import { useState } from 'react'
 import useAuthContext from '../../../hooks/useAuthContext'
 import Input from '../../../components/Input'
 import { Link } from 'react-router-dom'
-import { catchError } from '../../../utilities/catch-Error'
 import { validateRegister } from '../../validation/validation-register'
 
 const initialValue = {
