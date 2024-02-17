@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-const SearchContext = React.createContext()
+export const SearchContext = React.createContext()
 
 const defaultValue = {
     origin: "",
@@ -10,14 +10,16 @@ const defaultValue = {
 }
 function SearchContextProvider({ children }) {
 
-    const [input, setInput] = useState(defaultValue)
-    const [origin, setOrigin] = useState([])
-    const [destination, setDestination] = useState([])
+    const [schedule, setSchedule] = useState([])
 
-    const sharedObj = {}
+    const onSetSchedule = (newSchedule) => {
+        setSchedule(newSchedule)
+    }
+
+    const sharedObj = { schedule, onSetSchedule }
     return (
         <SearchContext.Provider value={sharedObj}>
-            SearchContextProvider
+            {children}
         </SearchContext.Provider>
     )
 }

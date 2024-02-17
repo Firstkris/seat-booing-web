@@ -24,6 +24,7 @@ export const getRoute = async (route, start) => {
 
 export const getSchedule = async (searchData) => {
     try {
+        console.log(searchData);
         const result = axios.post(`${URL}/search`, searchData)
         return result
     } catch (error) {

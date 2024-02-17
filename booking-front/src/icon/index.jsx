@@ -4,10 +4,12 @@ export function RightArrow({ className = null }) {
             width="40px"
             height="40px"
             viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+            fill="#212121"
+            xmlns="http://www.w3.org/2000/svg"
+            className={className}
+        >
             <path d="M9 17.898C9 18.972 10.2649 19.546 11.0731 18.8388L17.3838 13.3169C18.1806 12.6197 18.1806 11.3801 17.3838 10.6829L11.0731 5.16108C10.2649 4.45388 9 5.02785 9 6.1018V17.898Z"
-                fill="#212121" />
+            />
         </svg>
     )
 
@@ -19,9 +21,12 @@ export function LeftArrow({ className = null }) {
             width="40px"
             height="40px"
             viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 17.898C15 18.972 13.7351 19.546 12.9268 18.8388L6.61617 13.3169C5.81935 12.6197 5.81935 11.3801 6.61617 10.6829L12.9268 5.16108C13.7351 4.45388 15 5.02785 15 6.1018L15 17.898Z" fill="#212121" />
+            fill="#212121"
+            xmlns="http://www.w3.org/2000/svg"
+            className={className}
+        >
+
+            <path d="M15 17.898C15 18.972 13.7351 19.546 12.9268 18.8388L6.61617 13.3169C5.81935 12.6197 5.81935 11.3801 6.61617 10.6829L12.9268 5.16108C13.7351 4.45388 15 5.02785 15 6.1018L15 17.898Z" />
         </svg>
     )
 }
@@ -56,7 +61,7 @@ export function SearchIcon({ className = null }) {
 
 
 
-export const PersonIcon = (props) => {
+export const PersonIcon = ({ className = null }) => {
 
 
     return (
@@ -68,11 +73,12 @@ export const PersonIcon = (props) => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
             xmlSpace="preserve"
-            {...props}
+            className={className}
+            fill="#000"
         >
-            <style>{".st0{fill:#000}"}</style>
+
             <path
-                className="st0"
+
                 d="M458.159 404.216c-18.93-33.65-49.934-71.764-100.409-93.431-28.868 20.196-63.938 32.087-101.745 32.087-37.828 0-72.898-11.89-101.767-32.087-50.474 21.667-81.479 59.782-100.398 93.431C28.731 448.848 48.417 512 91.842 512h328.317c43.424 0 63.11-63.152 38-107.784zM256.005 300.641c74.144 0 134.231-60.108 134.231-134.242v-32.158C390.236 60.108 330.149 0 256.005 0 181.85 0 121.753 60.108 121.753 134.242V166.4c0 74.133 60.098 134.241 134.252 134.241z"
             />
         </svg>

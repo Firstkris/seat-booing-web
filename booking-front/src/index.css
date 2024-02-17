@@ -32,3 +32,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: transparent;
     /* you need to disable the background becasue the icon can repeat based on input size */ 
 }
+
+.steps .step:before {
+    background-color: primary;
+    height: 2px
+}
+

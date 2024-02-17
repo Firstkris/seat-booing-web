@@ -1,29 +1,54 @@
 
+import { useState } from 'react'
 import SearchCard from '../feature/search/components/SearchCard'
 import { OriginToDes } from '../icon'
+import Button from './Button'
 
-function ScheduleCard({ }) {
+function ScheduleCard({ items }) {
+
+    const { origin,
+        destination,
+        price
+
+    } = items
+
+    const departTime = new Date(items.departTime).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
+    const arrivalTime = new Date(items.arrivalTime).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
+
     return (
         <>
-            <div className={`flex justify-between items-center border-2 border-primary hover:bg-primary rounded-[40px] gap-4 px-6 py-6 text-2xl`} >
-
-                <div className='flex gap-2 w-full justify-center items-center font-bold'>
-                    <p>ต้นทาง</p>
-                    <hr className='border border-black w-8' />
-                    <p>ปลายทาง</p>
-                </div>
-                <div className='flex gap-2 w-full justify-end items-center font-extrabold '>
-                    <p className=' font-extrabold'>10:00</p>
-                    <OriginToDes />
-                    <p>12:00</p>
-                </div>
-                <div className='flex justify-center items-center font-extrabold grow w-full'>
-                    <p>฿ price </p>
-                </div>
-
-            </div>
+            <form onSubmit={handleSubmit}>
 
 
+
+                <Button
+                    btnBg={"bg-base-100 border-primary border-2 hover:bg-primary hover:border-primary text-2xl "} >
+
+
+                    <div className='text-black flex justify-between items-center w-full p-6'>
+                        <div className='flex flex-col gap-4 w-full justify-center items-center text-base font-semibold max-lg: '>
+                            <p>{origin}</p>
+                            <hr className='border border-black w-8' />
+                            <p>{destination}</p>
+                        </div>
+                        <div className='flex gap-4 w-full justify-center items-center font-extrabold '>
+                            <p className=' font-extrabold'>{departTime}</p>
+                            <OriginToDes />
+                            <p>{arrivalTime}</p>
+                        </div>
+                        <div className='flex justify-center items-center font-extrabold grow w-full'>
+                            <p>฿ {price}</p>
+                        </div>
+                    </div>
+
+
+                </Button>
+
+
+            </form>
         </>
     )
 }
