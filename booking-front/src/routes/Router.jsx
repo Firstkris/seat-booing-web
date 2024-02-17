@@ -4,6 +4,8 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProtectedRoute from "./ProtectedRoute";
 import SeatSelectPage from "../pages/SeatSelectPage";
+import PaymentPage from "../pages/PaymentPage";
+import SchedulePage from "../pages/SchedulePage";
 
 const router = createBrowserRouter([
     {
@@ -20,14 +22,19 @@ const router = createBrowserRouter([
         element: <RegisterPage />
     },
     {
-        path: 'seat-select',
+        path: '/seat-select',
         element: (
             <ProtectedRoute>
                 <SeatSelectPage />
             </ProtectedRoute>
 
 
-        )
+        ),
+
+    },
+    {
+        path: '/schedule',
+        element: <SchedulePage />
     }
 ])
 

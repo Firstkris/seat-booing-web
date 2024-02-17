@@ -46,6 +46,7 @@ export default {
   daisyui: {
     themes: [
       {
+
         "mylight": {
 
           "primary": "#F8CF32",

@@ -9,24 +9,29 @@ export const registerSchema = Joi.object({
     lastName: Joi.string().required().trim().message({
         'string.empty': "Last name is required"
     }),
-    idNumber: Joi.string().pattern(/^[0-9]{13}$/).trim().message({
+    idNumber: Joi.string().pattern(/^[0-9]{13}$/).message({
         'string.empty': "ID number is required",
         'string.pattern.base': "ID number must be 13 number"
     }),
-    email: Joi.string().email({ tlds: false }).required().trim().message({
-        'string.empty': "email is required"
+    email: Joi.string().trim().required().email({ tlds: false }).trim().message({
+        'any.only': "email is required",
+        'string.empty': "email is required",
+        'any.required': "email is required",
+        'string.trim': "email is required"
     }),
-    mobile: Joi.string().pattern(/^[0-9]{10}$/).trim().message({
+    mobile: Joi.string().required().pattern(/^[0-9]{10}$/).message({
         'string.empty': "mobile number is required",
         'string.pattern.base': "mobile must be at least 10 numbers"
     }),
-    password: Joi.string().pattern(/^[a-zA-Z0-9]{6,}$/)
+    password: Joi.string().pattern(/^[a-z][A-Z][0-9]{6,}$/)
         .required()
         .messages({
-            'string.empty': "is required",
-            'string.pattern.base': "must be at least 6 and contain a-z, 0-9"
+            'string.empty': "Password is required",
+            'string.pattern.base': "Password must be at least 6 and contain a-z,A-Z, 0-9"
         }),
 
 })
+
+
 
 export const validateRegister = (input) => validate(registerSchema)(input) 

@@ -1,37 +1,36 @@
 import { Link } from "react-router-dom"
-import Select from "../components/Select"
-import DateInput from "../components/DateInput"
 import Button from "../components/Button"
-import Input from "../components/Input"
 import Modal from "../components/Modal"
 import LoginForm from "../feature/auth/components/LoginForm"
+import SearchCard from "../feature/search/components/SearchCard"
+import { PersonIcon, SearchIcon } from "../icon"
 
 
 
 function HomePage() {
     return (
-        <div className="h-screen overflow-hidden px-8 max-sm:overflow-auto  ">
+        <div className="h-screen overflow-hidden px-8 max-sm:overflow-scroll max-sm:p-8">
             <div className="w-full ">
                 <div className="flex justify-end translate-y-32 max-sm:translate-y-8">
-                    <Modal
+                    {/* <Modal
                         label={"Login"}
-                        icon={"https://www.svgrepo.com/show/483912/person.svg"}
+                        icon={<PersonIcon />}
                     >
                         <LoginForm />
 
-
-                    </Modal>
+                    </Modal> */}
                 </div>
             </div>
 
-            {/* sign up hero */}
-            <div className='flex justify-between max-sm:flex-col-reverse' >
+            <div className='flex justify-between items-center gap-4 max-sm:flex-col-reverse sm:h-svh' >
 
-                <div className='px-8 translate-y-1/4 w-1/2 '>
-                    <div className='flex flex-col h-svh gap-16' >
-                        <div>
-                            <p className='text-7xl font-extrabold'>Find joy</p>
-                            <p className='text-7xl font-thin my-2'>in your journey</p>
+                {/* sign up hero */}
+                <div className='px-8 w-1/2 max-sm:w-full max-sm:m-4 '>
+
+                    <div className='flex flex-col gap-16 max-sm:gap-6' >
+                        <div className="text-7xl max-sm:text-6xl">
+                            <p className='font-extrabold'>Find joy</p>
+                            <p className='font-thin my-2'>in your journey</p>
                         </div>
 
                         <div>
@@ -39,28 +38,23 @@ function HomePage() {
                             <p className='text-xl font-thin'>Come and be part of our journey</p>
                         </div>
                         <Link to={'/register'}>
-                            <Button name={"JOIN NOW"}></Button>
+                            <Button name={"JOIN NOW"} width="w-1/2" ></Button>
                         </Link>
                     </div>
                 </div>
 
-                {/* card booking */}
-                <div className="translate-y-1/4 w-5/12 max-sm:w-full">
+                {/* search booking */}
+                <div className="w-5/12 max-sm:w-full">
+                    <div className="text-right mb-6">
+                        <Modal
+                            label={"Login"}
+                            icon={<PersonIcon />}
+                        >
+                            <LoginForm />
 
-                    <div className='grid grid-rows-5 p-6 h-1/2 w-full bg-primary rounded-[40px] gap-6 ' >
-                        <p className='text-5xl justify-self-center font-semibold self-center '>จองตั๋วโดยสาร</p>
-                        <Select label={'ต้นทาง'}></Select>
-                        <Select label={'ปลายทาง'}></Select>
-
-                        {/* <DateInput></DateInput> */}
-
-                        <Input type={"date"} label={"วันเดินทาง"}></Input>
-
-
-                        <Button name={"search"}></Button>
-
-
+                        </Modal>
                     </div>
+                    <SearchCard vertical={true} />
                 </div>
             </div>
             <div className='top-0 -translate-x-[calc(100vw-25%)] border border-primary rounded-[40px] h-[2024px] w-full rotate-[8deg] -z-10 fixed '></div>

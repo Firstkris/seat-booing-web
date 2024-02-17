@@ -1,11 +1,11 @@
-import Card from '../../../components/Card'
-
-import Select from '../../../components/Select'
 import { useState } from 'react'
+import Card from '../../../components/Card'
+import Select from '../../../components/Select'
 import useAuthContext from '../../../hooks/useAuthContext'
 import Input from '../../../components/Input'
 import { Link } from 'react-router-dom'
 import { validateRegister } from '../../validation/validation-register'
+import { toast } from 'react-toastify'
 
 const initialValue = {
     firstName: "",
@@ -26,11 +26,11 @@ const genderEnum = [
     { id: 3, gender: "NOTTELL", label: "ไม่ระบุ" }
 ]
 
-console.log(genderEnum);
 
 function RegisterForm() {
 
     const [input, setInput] = useState(initialValue)
+    const [error, setError] = useState({})
     const { register } = useAuthContext()
 
     const handleSubmit = async (e) => {
@@ -38,22 +38,26 @@ function RegisterForm() {
         try {
             e.preventDefault()
             const validateError = validateRegister(input)
+
+
             console.log(validateError);
+            if (validateError) {
+                return setError(validateError)
+            }
 
-            // if (validateError) {
-
-            // }
             console.log('submit');
-            register(input)
+            await register(input)
+            toast.success('register success')
 
         } catch (error) {
-            console.log(error);
+            toast.error(error.response?.data.message)
         }
 
     }
 
     const handleChangeInput = (e) => {
         console.log(e.target.value);
+        setError({})
         setInput(prv => ({ ...prv, [e.target.name]: e.target.value }))
     }
 
@@ -71,21 +75,25 @@ function RegisterForm() {
                         <Input
                             onChange={handleChangeInput}
                             value={input.email}
-                            name={"email"}
+                            name="email"
                             label={"Email"}
+                            errorMsg={error.email}
                         ></Input>
                         <Input
                             onChange={handleChangeInput}
                             value={input.mobile}
                             name={"mobile"}
                             label={"Phone Number"}
+                            errorMsg={error.mobile}
                         ></Input>
                     </div>
                     <Input
                         onChange={handleChangeInput}
                         value={input.password}
-                        name={"password"}
+                        name="password"
                         label={"Password"}
+                        errorMsg={error.password}
+
                     >
                     </Input>
 
@@ -103,6 +111,7 @@ function RegisterForm() {
                         value={input.idNumber}
                         name={"idNumber"}
                         label={"เลขประชาชน"}
+                        errorMsg={error.idNumber}
                     ></Input>
 
                     {/* name */}
@@ -128,6 +137,7 @@ function RegisterForm() {
                                 name={"gender"}
                                 label={"เพศ"}
                                 items={genderEnum}
+                                errorMsg={error.gender}
                             ></Select>
                         </div>
                         <div className="w-1/2">
@@ -137,6 +147,7 @@ function RegisterForm() {
                                 type={"date"}
                                 name={"birthDate"}
                                 label={"วันเดือนปีเกิด"}
+
                             ></Input>
                         </div>
                     </div>

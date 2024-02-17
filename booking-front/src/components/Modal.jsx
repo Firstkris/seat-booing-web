@@ -5,17 +5,17 @@ function Modal({ children, label, icon, title }) {
         <>
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <button
-                className="btn bg-transparent outline-none border-none shadow-md rounded-full w-1/12 max-sm:w-4/12"
+                className="btn bg-transparent outline-none border-none shadow-md rounded-full px-4 max-sm:w-4/12"
                 onClick={() => document.getElementById('my_modal_2').showModal()}
             >
-                <span className='flex justify-center items-center gap-2 text-lg w-6 h-6'>
-                    <img src={icon}></img>  {label}
+                <span className='flex justify-center items-center gap-2 text-lg'>
+                    {icon} {label}
                 </span>
 
             </button>
             <dialog id="my_modal_2" className="modal">
                 <div className="modal-box bg-primary flex flex-col pt-4 pb-16">
-                    <h3 className="font-bold text-4xl">{label}</h3>
+                    <h3 className="font-bold text-4xl text-left">{label}</h3>
                     <hr className='my-4 border-white border' />
                     {children}
                 </div>

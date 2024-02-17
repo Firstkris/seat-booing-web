@@ -5,7 +5,12 @@ export const validate = (schema) => (input) => {
 
     if (error) {
         console.dir(error)
+        const result = error.details.reduce((acc, el) => {
+            acc[el.context.key] = el.message
+            return acc
 
+        }, {})
+        return result
     }
-    // return ()
+
 }

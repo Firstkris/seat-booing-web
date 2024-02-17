@@ -6,23 +6,32 @@ function Input({
     name,
     value,
     onChange,
-    label
+    label,
+    errorMsg,
+    vertical = true
 
 }) {
+    const errorStyle = errorMsg
+        ? `border-2 border-red-500`
+        : ''
 
     return (
 
         <label className="form-control w-full ">
-            <div className="label">
-                <span className="label-text text-base max-sm:text-sm">{label}</span>
-            </div>
+            {vertical
+                && <div className="label">
+                    <span className="label-text text-base max-sm:text-sm">{label}</span>
+                </div>
+            }
+
             <input
                 type={type}
                 value={value}
                 onChange={onChange}
                 name={name}
-                className="input input-bordered w-full rounded-full max-sm:h-8 "
+                className={`input input-bordered w-full rounded-full max-sm:h-8  ${errorStyle}`}
             />
+            <span className='text-red-500'>{errorMsg}</span>
 
         </label>
 

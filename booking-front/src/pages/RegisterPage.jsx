@@ -11,31 +11,28 @@ function RegisterPage() {
 
             <div className='translate-y-[60px] max-w-screen-md mx-auto max-sm:translate-y-0  '>
                 <RegisterForm></RegisterForm>
-                <div className="absolute -bottom-0 max-sm:hidden">
-                    <img
+                <div className=" absolute -bottom-0 max-sm:hidden">
+                    {/* <img
+                        className="invisible"
                         src="src/assets/mountain.svg">
 
+                    </img> */}
 
+                    {/* <div className="absolute bottom-0 left-0">
 
-                    </img>
+                        <div className="w-screen flex justify-between items-center">
 
-                    <div className="w-full flex">
-                        <div className=" -right-64 h-11/12 absolute bottom-0 z-10 flex justify-between items-center gap-[200px]">
-                            <img src="src/assets/women1.png"></img>
-                        </div>
-
-                        <div className=" -left-60 absolute bottom-0 z-10 flex justify-between items-center gap-[200px]">
                             <img src="src/assets/man1.png"></img>
+
+
+                            <img src="src/assets/women1.png"></img>
+
                         </div>
-                    </div>
+                    </div> */}
 
                 </div>
 
             </div>
-
-
-
-
 
         </div>
     )
