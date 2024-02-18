@@ -1,12 +1,13 @@
 import { Navigate } from "react-router-dom"
 import useAuthContext from "../hooks/useAuthContext"
+import useSearchContext from "../hooks/useSearchContext"
 
 
 function ProtectedRoute({ children }) {
 
-    const { user } = useAuthContext()
+    const { schedule } = useSearchContext()
     return (
-        user ? children : <Navigate to={"/login"} />
+        schedule.length === 0 ? <Navigate to={"/"} /> : ""
     )
 }
 

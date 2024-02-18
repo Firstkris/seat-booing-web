@@ -1,4 +1,5 @@
 import React from 'react'
+import { PersonIcon } from '../icon'
 
 function Modal({ children, label, icon, title }) {
     return (
@@ -14,7 +15,7 @@ function Modal({ children, label, icon, title }) {
 
             </button>
             <dialog id="my_modal_2" className="modal">
-                <div className="modal-box bg-primary flex flex-col pt-4 pb-16">
+                <div className="modal-box bg-primary flex flex-col pt-4 pb-16 h-1/2 justify-center rounded-[40px] ">
                     <h3 className="font-bold text-4xl text-left">{label}</h3>
                     <hr className='my-4 border-white border' />
                     {children}

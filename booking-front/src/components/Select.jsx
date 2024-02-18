@@ -1,5 +1,6 @@
+import { PersonIcon } from "../icon"
 
-function Select({ name, onChange, label, items, value, disabled = false, vertical, errorMsg, required }) {
+function Select({ name, onChange, label, items, value, disabled = false, vertical, errorMsg, isRequired = 'required', icon }) {
 
     return (
         <>
@@ -7,6 +8,7 @@ function Select({ name, onChange, label, items, value, disabled = false, vertica
                 {vertical
                     ? (<div className="label">
                         <span className="label-text text-base max-sm:text-sm">{label}</span>
+
                     </div>)
                     : (<></>)}
 
@@ -22,10 +24,14 @@ function Select({ name, onChange, label, items, value, disabled = false, vertica
                             onChange={onChange}
                             value={value}
                             name={name}
-                            className="select outline-none border-none rounded-full max-sm:min-h-8 max-sm:h-8">
-                            <option disabled value="" >{label}</option>
+                            className="select outline-none border-none rounded-full max-sm:min-h-8 max-sm:h-8"
+                        // required={isRequired}
+                        >
+
+                            <option disabled value="" > {icon} &nbsp; {label} </option>
+
                             {items && items.map((el) => (
-                                <option key={el.id} value={el[name]}>{el[name]}</option>
+                                <option key={el.id} value={el[name]}>{icon} &nbsp; {el[name]}</option>
                             ))}
                         </select>
                     </>)}

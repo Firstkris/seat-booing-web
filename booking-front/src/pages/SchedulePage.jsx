@@ -15,7 +15,7 @@ function SchedulePage() {
 
     const { schedule } = useSearchContext()
 
-
+    console.log(schedule);
     return (
         <div className='relative flex flex-col gap-6 w-10/12 mx-auto mt-4'>
             <SearchCard vertical={false} />

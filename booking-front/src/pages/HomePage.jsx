@@ -11,17 +11,6 @@ function HomePage() {
     return (
         <div className="h-screen overflow-hidden px-8 max-sm:overflow-scroll max-sm:p-8">
 
-            {/* <div className="w-full ">
-                <div className="flex justify-end translate-y-32 max-sm:translate-y-8">
-                     <Modal
-                        label={"Login"}
-                        icon={<PersonIcon />}
-                    >
-                        <LoginForm />
-
-                    </Modal>
-                </div>
-            </div> */}
 
             <div className='flex justify-between items-center gap-4 max-sm:flex-col-reverse sm:h-svh' >
 

@@ -1,28 +1,36 @@
-import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useMemo } from 'react'
+
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+
 import Select from '../../../components/Select'
 import Input from '../../../components/Input'
 import Button from '../../../components/Button'
-import { useEffect } from 'react'
 import { getRoute, getSchedule } from '../../../api/search'
-import { useState } from 'react'
-import { SearchIcon } from '../../../icon'
-import { Link } from 'react-router-dom'
 import useSearchContext from '../../../hooks/useSearchContext'
-import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+
+import { validateSearch } from '../../validation/validation-search'
+import { SearchIcon } from '../../../icon'
+
 
 const defaultValue = {
     origin: "",
     destination: "",
-    departureDate: new Date()
+    departureDate: new Date().toISOString().split('T')[0]
 }
 
+// const [today, time] = new Date()
+// console.log(today);
 
 function SearchCard({ vertical }) {
 
     const [input, setInput] = useState(defaultValue)
     const [origin, setOrigin] = useState([])
     const [destination, setDestination] = useState([])
+    const [error, setError] = useState({})
+    const navigate = useNavigate()
 
     const { onSetSchedule } = useSearchContext()
 
@@ -39,20 +47,31 @@ function SearchCard({ vertical }) {
 
     const getAllRoute = async () => {
         const originRoute = await getRoute('origin', '')
+        console.log(originRoute.data.route);
+        setOrigin(originRoute.data.route)
+        // setInput((prv) => ({...prv, origin: }))
+        // getDestinationRoute()
+
+    }
+
+    const getDestinationRoute = async () => {
         if (input.origin) {
             const destinationRoute = await getRoute('destination', input.origin)
             setDestination(destinationRoute.data.route)
         }
-        console.log(originRoute.data.route);
-        setOrigin(originRoute.data.route)
-        // setInput((prv) => ({...prv, origin: }))
-
     }
 
     const handleSubmit = async (e) => {
         try {
             e.preventDefault()
             console.log('search');
+            const validateError = validateSearch(input)
+
+            if (validateError) {
+                console.log(validateError);
+                return setError(validateError)
+            }
+
             const searchData = {
                 origin: input.origin,
                 destination: input.destination,
@@ -63,70 +82,95 @@ function SearchCard({ vertical }) {
             const res = await getSchedule(searchData)
             console.log(res.data.schedule);
             onSetSchedule(res.data.schedule)
+            localStorage.setItem('searchData', searchData)
+
+            navigate('/schedule')
+
 
         } catch (error) {
             toast.error(error.response?.data.message)
         }
-
-
     }
 
     useEffect(() => {
         getAllRoute()
-        // setOrigin(defaultOrigin)
+        getDestinationRoute()
     }, [input.origin])
+
 
     return (
         <>
             <form onSubmit={handleSubmit}>
-
-                <div className={`${cardStyle} `} >
-                    {vertical ? (<p className='text-5xl justify-self-center font-semibold self-center max-sm:text-2xl '>จองตั๋วโดยสาร</p>) : <></>}
+                <div className={`${cardStyle} `}>
+                    {vertical ? (
+                        <p className="text-5xl justify-self-center font-semibold self-center max-sm:text-2xl ">
+                            จองตั๋วโดยสาร
+                        </p>
+                    ) : (
+                        <></>
+                    )}
 
                     <Select
                         items={origin}
                         name={"origin"}
-                        label={'ต้นทาง'}
+                        label={"ต้นทาง"}
                         value={input.origin}
                         onChange={handleChangeInput}
                         vertical={vertical}
+                        icon="&#xf3c5;"
                     ></Select>
-                    {
-                        input.origin
-                            ? (<Select
-                                vertical={vertical}
-                                label={'ปลายทาง'}
-                                name={"destination"}
-                                onChange={handleChangeInput}
-                                items={destination}
-                                value={input.destination}
-                            ></Select>)
-                            : (<Select label={'ปลายทาง'} vertical={vertical} disabled></Select>)
-                    }
+                    {input.origin ? (
+                        <Select
+                            vertical={vertical}
+                            label={"ปลายทาง"}
+                            name={"destination"}
+                            onChange={handleChangeInput}
+                            items={destination}
+                            value={input.destination}
+                            icon="&#xf024;"
+                        ></Select>
+                    ) : (
+                        <Select label={"ปลายทาง"} vertical={vertical} disabled></Select>
+                    )}
 
                     {/* <DateInput></DateInput> */}
-                    <div className='w-full' >
-                        <Input type={"date"} label={"วันเดินทาง"} name={"departureDate"} vertical={vertical} onChange={handleChangeInput}></Input>
+                    <div className="w-full">
+                        <Input
+                            type={"date"}
+                            label={"วันเดินทาง"}
+                            name={"departureDate"}
+                            vertical={vertical}
+                            onChange={handleChangeInput}
+                            value={input.departureDate}
+                        ></Input>
                     </div>
 
-                    <div className='w-full text-center'>
+                    {/* Button */}
 
-                        {vertical
-                            ? (<div className='mt-4  '>
-                                <Button name={"search"} icon={<SearchIcon />} />
+                    <div className="w-full text-center">
+                        {error.origin || error.destination
+                            ? (
+                                <small className='text-error'>{error.destination} ต้นทาง และ ปลายทาง</small>
+                            )
+                            : ""
 
-                            </div>)
-                            : (<Button icon={<SearchIcon />} />)
+
                         }
+
+                        {vertical ? (
+                            <div className="mt-2 ">
+                                <Button name={"search"} icon={<SearchIcon />} />
+                            </div>
+                        ) : (
+                            <Button icon={<SearchIcon />} />
+                        )}
+
+
                     </div>
-
-
-
-
                 </div>
             </form>
         </>
-    )
+    );
 }
 
 export default SearchCard

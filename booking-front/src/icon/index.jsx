@@ -63,7 +63,6 @@ export function SearchIcon({ className = null }) {
 
 export const PersonIcon = ({ className = null }) => {
 
-
     return (
 
         <svg

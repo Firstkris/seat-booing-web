@@ -56,10 +56,9 @@ function DateChangeButtonGroup() {
 
     const handleChangeDate = async (num) => {
         console.log('handleChangeDate', handleChangeDate)
-        console.log(num);
-        // setDate(prv => prv + num)
-        console.log(dateTime.scheduleDate);
+
         setDateTime(prv => ({ ...prv, ["scheduleDate"]: dateTime.scheduleDate + num }))
+
         setClick(prv => !prv)
 
     }
@@ -79,6 +78,7 @@ function DateChangeButtonGroup() {
             const res = await getSchedule(searchData)
             console.log(res.data.schedule);
             onSetSchedule(res.data.schedule)
+            setClick(prv => !prv)
         } catch (error) {
             toast.error(error.response?.data.message)
         }
@@ -90,7 +90,7 @@ function DateChangeButtonGroup() {
     }, [schedule])
 
     useEffect(() => {
-        reloadScheduleByDateChange()
+        if (click) reloadScheduleByDateChange()
     }, [click])
 
     return (

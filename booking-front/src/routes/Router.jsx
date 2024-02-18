@@ -10,7 +10,10 @@ import SchedulePage from "../pages/SchedulePage";
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <HomePage />
+        element:
+
+            <HomePage />
+
         // element: <LoginPage></LoginPage>
     },
     {
@@ -34,7 +37,11 @@ const router = createBrowserRouter([
     },
     {
         path: '/schedule',
-        element: <SchedulePage />
+        element: (
+            // <ProtectedRoute>
+            <SchedulePage />
+            // </ProtectedRoute>
+        )
     }
 ])
 
