@@ -39,7 +39,7 @@ exports.login = catchError(
             createError('User not found', 400)
         }
 
-        const isMatch = encryptService.compare(req.body.password, existUser.password)
+        const isMatch = await encryptService.compare(req.body.password, existUser.password)
 
         if (!isMatch) {
             createError('Access Denial please check your credentials data', 400)

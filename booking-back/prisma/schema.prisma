@@ -64,15 +64,15 @@ model BookingDetail {
 }
 
 model Schedule {
-  id             Int             @id @default(autoincrement())
-  origin         String
-  destination    String
-  departTime     DateTime        @db.Time()
-  arrivalTime    DateTime        @db.Time()
-  departureDate  DateTime        @db.Date
-  price          Decimal         @db.Decimal()
-  seat_avaliable Int
-  status         ScheduleStatus?
+  id            Int             @id @default(autoincrement())
+  origin        String
+  destination   String
+  departTime    DateTime        @db.Time()
+  arrivalTime   DateTime        @db.Time()
+  departureDate DateTime        @db.Date
+  price         Decimal         @db.Decimal()
+  seatAvailable Int             @map("seat_available")
+  status        ScheduleStatus?
 
   busId Int @map("bus_id")
   bus   Bus @relation(fields: [busId], references: [id])
@@ -81,11 +81,11 @@ model Schedule {
 }
 
 model Bus {
-  id         Int        @id @default(autoincrement())
-  status     Boolean
-  total_seat Int
-  schedule   Schedule[]
-  seat       Seat[]
+  id        Int        @id @default(autoincrement())
+  status    Boolean
+  totalSeat Int        @map("total_seat")
+  schedule  Schedule[]
+  seat      Seat[]
 
   @@map("bus")
 }
