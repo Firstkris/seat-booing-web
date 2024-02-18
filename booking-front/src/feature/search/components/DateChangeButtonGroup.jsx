@@ -1,38 +1,22 @@
-import React from 'react'
-import { LeftArrow, PersonIcon, RightArrow } from '../../../icon'
+import { LeftArrow, RightArrow } from '../../../icon'
 import Button from '../../../components/Button'
 import { useState } from 'react'
 import useSearchContext from '../../../hooks/useSearchContext'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { getSchedule } from '../../../api/search'
-import Modal from '../../../components/Modal'
 
 
-const defaultValue = {
-    origin: "",
-    destination: "",
-    departureDate: new Date()
-}
 function DateChangeButtonGroup() {
 
-    const [input, setInput] = useState(defaultValue)
-    const [origin, setOrigin] = useState([])
-    const [destination, setDestination] = useState([])
 
-    const [date, setDate] = useState(0)
-    const [month, setmonth] = useState()
-    const [year, setYear] = useState()
     const [dateTime, setDateTime] = useState({})
-
     const [click, setClick] = useState(false)
 
     const { schedule, onSetSchedule } = useSearchContext()
 
     //schedule = [{},{},...]
     const data = schedule[0]
-
-    console.log(schedule?.[0]);
 
     const options = {
         month: "short",
@@ -49,9 +33,7 @@ function DateChangeButtonGroup() {
         monthName = fullDateTime.toLocaleDateString([], options)
 
         setDateTime(prv => ({ ...prv, scheduleDate, scheduleMonth, monthName, scheduleYear }))
-        // setDate(scheduleDate)
-        // setmonth(scheduleMonth)
-        // setYear(scheduleYear)
+
     }
 
     const handleChangeDate = async (num) => {
@@ -65,7 +47,6 @@ function DateChangeButtonGroup() {
 
     const reloadScheduleByDateChange = async () => {
         try {
-            // console.log('search');
 
             console.log(`${dateTime.scheduleYear}-0${dateTime.scheduleMonth}-${dateTime.scheduleDate}`);
             const searchData = {

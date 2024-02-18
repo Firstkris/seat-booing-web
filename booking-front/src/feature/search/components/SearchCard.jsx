@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { useMemo } from 'react'
 
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
@@ -21,8 +20,6 @@ const defaultValue = {
     departureDate: new Date().toISOString().split('T')[0]
 }
 
-// const [today, time] = new Date()
-// console.log(today);
 
 function SearchCard({ vertical }) {
 
@@ -49,8 +46,6 @@ function SearchCard({ vertical }) {
         const originRoute = await getRoute('origin', '')
         console.log(originRoute.data.route);
         setOrigin(originRoute.data.route)
-        // setInput((prv) => ({...prv, origin: }))
-        // getDestinationRoute()
 
     }
 
