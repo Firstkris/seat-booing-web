@@ -9,27 +9,18 @@ import SchedulePage from "../pages/SchedulePage";
 import RedirectRoute from "./RedirectRoute";
 import ProfilePage from "../pages/ProfilePage";
 import PassengerInfo from "../pages/PassengerInfo";
+import { Navigate } from "react-router-dom";
+import NavigatePage from "../pages/NavigatePage";
+import { Outlet } from "react-router-dom";
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element:
-
-            <HomePage />
-
-        // element: <LoginPage></LoginPage>
+        element: <HomePage />
     },
     {
         path: '/register',
         element: <RegisterPage />
-    },
-    {
-        path: '/login',
-        element: (
-            <RedirectRoute>
-                <LoginPage />
-            </RedirectRoute>
-        )
     },
     {
         path: '/schedule',
@@ -39,12 +30,26 @@ const router = createBrowserRouter([
             // </ProtectedRoute>
         )
     },
+    {
+        path: '/passenger-info',
+        element: (
+            <ProtectedRoute >
+                <PassengerInfo />
+            </ProtectedRoute>
+
+        )
+
+    },
 
     {
         path: '/seat-select',
-        element: (<SeatSelectPage />),
-
+        element: (
+            <ProtectedRoute >
+                <SeatSelectPage />
+            </ProtectedRoute>
+        )
     },
+
     {
         path: '/profile',
         element: (
@@ -52,10 +57,12 @@ const router = createBrowserRouter([
         )
     },
     {
-        path: '/passenger-info',
-        element: <PassengerInfo />
-
+        path: '*',
+        element: (
+            <NavigatePage />
+        )
     }
+
 
 ])
 

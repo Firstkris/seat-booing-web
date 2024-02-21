@@ -16,13 +16,17 @@ function SeatSelectPage() {
             <form className="h-full">
 
 
-
+                {/* Button  */}
                 <div className="flex justify-around w-1/2 mx-auto gap-16 mt-8 max-lg:flex-col max-lg:w-3/4 max-lg:items-center ">
                     <div className="w-1/2">
-                        <Button btnBg="btn-primary bg-transparent border-2 hover:bg-primary hover:border-primary" name={'ย้อนกลับ'}></Button>
+                        <Link to={'/passenger-info'}>
+
+                            <Button btnBg="btn-primary bg-transparent border-2 hover:bg-primary hover:border-primary" name={'ย้อนกลับ'}></Button>
+                        </Link>
+
                     </div>
                     <div className="w-1/2">
-                        <Link to={'/seat-select'}>
+                        <Link to={'/'}>
                             <Button name={'ถัดไป'}></Button>
                         </Link>
                     </div>

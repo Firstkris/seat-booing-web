@@ -10,20 +10,23 @@ import { useEffect } from "react"
 function PassengerInfo() {
 
     const { user, selectSchedule, onSelectSchedule } = useAuthContext()
-    // const { selectSchedule } = useSelectScheduleContext()
-    // console.log(user);
+
     console.log(selectSchedule);
 
     const options = {
-        weekday: "short",
+        weekday: "long",
         month: "long",
         day: "numeric",
     };
 
     const { origin, destination } = selectSchedule
 
-    const departureDate = new Date(selectSchedule.departureDate).toLocaleString('en-GB', options)
-    console.log(departureDate);
+    // const departureDate = new Date(selectSchedule.departureDate).toLocaleString('en-GB', options)
+    const departureDate = new Date(selectSchedule.departureDate).toLocaleString('th-TH', options)
+    const departTime = new Date(selectSchedule.departTime).toLocaleTimeString([], { hourCycle: 'h24', hour: "2-digit", minute: '2-digit' })
+    console.log(departureDate, departTime);
+
+
     const getItemFromLocalStorage = () => {
         const selectedItem = localStorage.getItem('selectedSchedule')
         onSelectSchedule(JSON.parse(selectedItem))
@@ -86,18 +89,11 @@ function PassengerInfo() {
                                         <p>วันเวลาเดินทาง : </p>
                                     </div>
                                     <div className="text-left col-span-2">
-                                        <p className="font-semibold">{departureDate}</p>
+                                        <p className="font-semibold">{departureDate} {departTime}</p>
                                     </div>
                                 </div>
 
-
-
-
-
                             </div>
-
-
-
 
                         </Card>
                     </div>

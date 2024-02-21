@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { OriginToDes } from '../icon'
 import Button from './Button'
 import useAuthContext from '../hooks/useAuthContext'
-import useSelectScheduleContext from '../hooks/useSchedule'
 
 function ScheduleCard({ items }) {
 

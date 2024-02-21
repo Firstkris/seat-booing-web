@@ -1,11 +1,10 @@
+import LoginForm from "../feature/auth/components/LoginForm"
 
 
 function LoginPage() {
     return (
         <div>
-            LoginPage
-            {/* <SearchIcon /> */}
-
+            <LoginForm />
         </div>
     )
 }

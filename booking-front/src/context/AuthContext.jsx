@@ -31,6 +31,7 @@ function AuthContextProvider({ children }) {
     const logOut = () => {
         setUser(null)
         clearToken()
+        localStorage.clear()
     }
 
     const getUserByToken = async () => {
