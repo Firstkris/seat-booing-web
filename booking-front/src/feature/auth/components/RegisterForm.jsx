@@ -65,7 +65,7 @@ function RegisterForm() {
     return (
         <div className='grid grid-cols-12'>
             <Link to={"/"} className='col-span-1'> &#60; Back</Link>
-            <div className='col-span-10'>
+            <div className='col-span-10 '>
                 <Card
                     onSubmit={handleSubmit}
                     name={"สมัครสมาชิก"} >
@@ -160,11 +160,22 @@ function RegisterForm() {
                         label={"ที่อยู่"}
                     ></Input>
 
-
-
                 </Card>
+                <div className=" absolute left-0 w-screen -bottom-0 -z-10  max-sm:hidden">
+                    <img
+                        // className="invisible"
+                        src="src/assets/mountain.svg">
+
+                    </img>
+
+                </div>
+
             </div>
+
             <Link to={"/"} className='invisible'> &#60; Back</Link>
+
+
+
         </div>
     )
 }

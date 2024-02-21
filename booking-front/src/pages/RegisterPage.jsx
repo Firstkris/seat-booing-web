@@ -7,32 +7,34 @@ function RegisterPage() {
 
 
     return (
-        <div className="relative overflow-hidden max-sm:overflow-auto">
+        <div className="relative flex justify-center items-center h-screen max-sm:overflow-auto">
 
-            <div className='translate-y-[60px] max-w-screen-md mx-auto max-sm:translate-y-0  '>
+            <div className='max-w-screen-md mx-auto max-sm:translate-y-0 w-11/12'>
                 <RegisterForm></RegisterForm>
-                <div className=" absolute -bottom-0 max-sm:hidden">
-                    {/* <img
-                        className="invisible"
-                        src="src/assets/mountain.svg">
 
-                    </img> */}
+            </div>
 
-                    {/* <div className="absolute bottom-0 left-0">
+            <div className="absolute bottom-0 right-0 left-0 -z-10">
 
-                        <div className="w-screen flex justify-between items-center">
+                <div className="flex justify-between items-end">
+                    <div>
 
-                            <img src="src/assets/man1.png"></img>
+                        <img className="flex-shrink  max-md:hidden" src="src/assets/man1.png"></img>
+                    </div>
+                    <div>
 
+                        <img className="flex-shrink" src="src/assets/mountain.svg"></img>
+                    </div>
 
-                            <img src="src/assets/women1.png"></img>
-
-                        </div>
-                    </div> */}
+                    <div>
+                        <img className="flex-shrink  max-md:hidden" src="src/assets/women1.png"></img>
+                    </div>
 
                 </div>
 
+
             </div>
+
 
         </div>
     )

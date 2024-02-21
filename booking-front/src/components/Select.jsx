@@ -1,4 +1,3 @@
-import { PersonIcon } from "../icon"
 
 function Select({ name, onChange, label, items, value, disabled = false, vertical, errorMsg, isRequired = 'required', icon }) {
 

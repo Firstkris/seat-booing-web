@@ -12,7 +12,7 @@ function Button({
             <button
                 onClick={onClick}
                 // onClick=<Navigate to="/register" />
-                className={`btn ${btnBg} rounded-r-full h-fit rounded-l-full ${width}  font-extrabold max-sm:text-base max-sm:w-1/2 max-sm:h-8`}
+                className={`btn ${btnBg} rounded-r-full h-fit rounded-l-full ${width}  font-extrabold max-sm:text-base  max-sm:h-8`}
             >
                 {icon && <span>{icon}</span>}
                 {name}

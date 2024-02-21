@@ -1,10 +1,15 @@
 
-import { useState } from 'react'
-import SearchCard from '../feature/search/components/SearchCard'
+import { useNavigate } from 'react-router-dom'
 import { OriginToDes } from '../icon'
 import Button from './Button'
+import useAuthContext from '../hooks/useAuthContext'
+import useSelectScheduleContext from '../hooks/useSchedule'
 
 function ScheduleCard({ items }) {
+
+    const navigate = useNavigate()
+    const { onSelectSchedule } = useAuthContext()
+    // const { onSelectSchedule } = useSelectScheduleContext()
 
     const { origin,
         destination,
@@ -14,15 +19,17 @@ function ScheduleCard({ items }) {
 
     const departTime = new Date(items.departTime).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
     const arrivalTime = new Date(items.arrivalTime).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
+
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(items);
+        onSelectSchedule(items)
+        navigate('/passenger-info')
     }
 
     return (
         <>
             <form onSubmit={handleSubmit}>
-
-
 
                 <Button
                     btnBg={"bg-base-100 border-primary border-2 hover:bg-primary hover:border-primary text-2xl "} >
@@ -43,7 +50,6 @@ function ScheduleCard({ items }) {
                             <p>฿ {price}</p>
                         </div>
                     </div>
-
 
                 </Button>
 

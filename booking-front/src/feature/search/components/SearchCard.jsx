@@ -44,7 +44,6 @@ function SearchCard({ vertical }) {
 
     const getAllRoute = async () => {
         const originRoute = await getRoute('origin', '')
-        console.log(originRoute.data.route);
         setOrigin(originRoute.data.route)
 
     }
@@ -59,7 +58,6 @@ function SearchCard({ vertical }) {
     const handleSubmit = async (e) => {
         try {
             e.preventDefault()
-            console.log('search');
             const validateError = validateSearch(input)
 
             if (validateError) {
@@ -72,10 +70,8 @@ function SearchCard({ vertical }) {
                 destination: input.destination,
                 departureDate: new Date(input.departureDate)
             }
-            console.log(searchData);
 
             const res = await getSchedule(searchData)
-            console.log(res.data.schedule);
             onSetSchedule(res.data.schedule)
             localStorage.setItem('searchData', searchData)
 

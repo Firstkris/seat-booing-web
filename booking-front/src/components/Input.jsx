@@ -8,7 +8,10 @@ function Input({
     onChange,
     label,
     errorMsg,
-    vertical = true
+    vertical = true,
+    disable = '',
+    readOnly = ''
+
 
 }) {
     const errorStyle = errorMsg
@@ -29,7 +32,10 @@ function Input({
                 value={value}
                 onChange={onChange}
                 name={name}
-                className={`input input-bordered w-full rounded-full max-sm:h-8  ${errorStyle}`}
+                className={`input input-bordered border-none w-full rounded-full max-sm:h-8 read-only:text-slate-600 read-only:bg-base-200 read-only: ${errorStyle}`}
+                disabled={disable}
+                readOnly={readOnly}
+
             />
             <span className='text-red-500'>{errorMsg}</span>
 

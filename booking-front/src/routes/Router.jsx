@@ -6,6 +6,9 @@ import ProtectedRoute from "./ProtectedRoute";
 import SeatSelectPage from "../pages/SeatSelectPage";
 import PaymentPage from "../pages/PaymentPage";
 import SchedulePage from "../pages/SchedulePage";
+import RedirectRoute from "./RedirectRoute";
+import ProfilePage from "../pages/ProfilePage";
+import PassengerInfo from "../pages/PassengerInfo";
 
 const router = createBrowserRouter([
     {
@@ -17,23 +20,16 @@ const router = createBrowserRouter([
         // element: <LoginPage></LoginPage>
     },
     {
-        path: '/login',
-        element: <LoginPage></LoginPage>
-    },
-    {
         path: '/register',
         element: <RegisterPage />
     },
     {
-        path: '/seat-select',
+        path: '/login',
         element: (
-            <ProtectedRoute>
-                <SeatSelectPage />
-            </ProtectedRoute>
-
-
-        ),
-
+            <RedirectRoute>
+                <LoginPage />
+            </RedirectRoute>
+        )
     },
     {
         path: '/schedule',
@@ -42,7 +38,25 @@ const router = createBrowserRouter([
             <SchedulePage />
             // </ProtectedRoute>
         )
+    },
+
+    {
+        path: '/seat-select',
+        element: (<SeatSelectPage />),
+
+    },
+    {
+        path: '/profile',
+        element: (
+            <ProfilePage />
+        )
+    },
+    {
+        path: '/passenger-info',
+        element: <PassengerInfo />
+
     }
+
 ])
 
 export default function Routes() {

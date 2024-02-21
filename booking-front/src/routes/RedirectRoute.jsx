@@ -1,11 +1,12 @@
-import React from 'react'
+import { Navigate } from "react-router-dom"
+import useAuthContext from "../hooks/useAuthContext"
 
-function RedirectRoute() {
-    return (
-        <div>
-            RedirectRoute
-        </div>
-    )
+function RedirectRoute({ children }) {
+
+    const { user } = useAuthContext()
+
+
+    return user ? <Navigate to="/" /> : children
 }
 
 export default RedirectRoute
