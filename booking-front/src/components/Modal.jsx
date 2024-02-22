@@ -1,7 +1,4 @@
-import React from 'react'
-import { PersonIcon } from '../icon'
-
-function Modal({ children, label, icon, title }) {
+function Modal({ children, label, icon }) {
     return (
         <>
             {/* Open the modal using document.getElementById('ID').showModal() method */}

@@ -54,9 +54,20 @@ function AuthContextProvider({ children }) {
         setSelectSchedule(item)
     }
 
+    const getItemFromLocalStorage = () => {
+        const selectedItem = localStorage.getItem('selectedSchedule')
+        onSelectSchedule(JSON.parse(selectedItem))
+    }
+
+    useEffect(() => {
+
+        getItemFromLocalStorage()
+    }, [])
+
 
     useEffect(() => {
         const token = getToken()
+        getItemFromLocalStorage()
         if (token) getUserByToken()
         setTimeout(() => { setLoading(false) }, 500)
     }, [])

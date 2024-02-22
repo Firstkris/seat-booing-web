@@ -9,7 +9,7 @@ function Card({ children, name, onSubmit, btn = true, bg = true }) {
 
         <form onSubmit={onSubmit}>
             <div className={`card card-compact rounded-[40px] w-full h-full p-4 ${bgStyle}  shadow-xl mx-auto max-sm:w-11/12`}  >
-                <div className="card-body text-center gap-4 max-sm:gap-1">
+                <div className="card-body text-center max-sm:gap-1">
 
                     <h2 className="text-4xl font-bold max-sm:text-xl ">{name}</h2>
                     {children}

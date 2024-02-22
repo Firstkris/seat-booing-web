@@ -1,6 +1,6 @@
-import React from 'react'
 import useAuthContext from '../hooks/useAuthContext'
 import Card from '../components/Card'
+import UserInfoCard from '../components/UserInfoCard'
 
 function ProfilePage() {
 
@@ -8,9 +8,7 @@ function ProfilePage() {
 
     return (
         <div className='h-screen'>
-            <Card btn={false}>
-                <p>{user.firstName}</p>
-            </Card>
+            <UserInfoCard />
         </div>
     )
 }

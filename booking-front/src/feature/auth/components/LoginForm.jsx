@@ -5,7 +5,7 @@ import Button from '../../../components/Button'
 import Input from '../../../components/Input'
 import { validateLogin } from '../../validation/validation-login'
 import useAuthContext from '../../../hooks/useAuthContext'
-import { PersonIcon } from '../../../icon'
+
 
 const defaultValue = { email: "", password: "" }
 

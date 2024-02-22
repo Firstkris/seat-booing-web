@@ -33,13 +33,13 @@ export function LeftArrow({ className = null }) {
 
 export function SeatIcon({ className = null }) {
     return (
-        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="60px" height="60px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 
-            <g id="SVGRepo_bgCarrier" stroke-width="0" />
+            <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+            <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
 
-            <g id="SVGRepo_iconCarrier"> <path d="M5.55556 18H18.4444C20.4081 18 22 16.4081 22 14.4444V12C22 10.8954 21.1046 10 20 10C18.8954 10 18 10.8954 18 12V13.2C18 13.6418 17.6418 14 17.2 14H6.8C6.35817 14 6 13.6418 6 13.2V12C6 10.8954 5.10457 10 4 10C2.89543 10 2 10.8954 2 12V14.4444C2 16.4081 3.59188 18 5.55556 18Z" stroke="#000000" stroke-width="1.5" /> <path d="M20 10C20 9.07069 20 8.60603 19.9231 8.21964C19.6075 6.63288 18.3671 5.39249 16.7804 5.07686C16.394 5 15.9293 5 15 5H9C8.07069 5 7.60603 5 7.21964 5.07686C5.63288 5.39249 4.39249 6.63288 4.07686 8.21964C4 8.60603 4 9.07069 4 10" stroke="#000000" stroke-width="1.5" /> <path d="M20 19V18M4 19V18" stroke="#000000" stroke-width="1.5" stroke-linecap="round" /> </g>
+            <g id="SVGRepo_iconCarrier"> <path d="M5.55556 18H18.4444C20.4081 18 22 16.4081 22 14.4444V12C22 10.8954 21.1046 10 20 10C18.8954 10 18 10.8954 18 12V13.2C18 13.6418 17.6418 14 17.2 14H6.8C6.35817 14 6 13.6418 6 13.2V12C6 10.8954 5.10457 10 4 10C2.89543 10 2 10.8954 2 12V14.4444C2 16.4081 3.59188 18 5.55556 18Z" stroke="#000000" strokeWidth="1.5" /> <path d="M20 10C20 9.07069 20 8.60603 19.9231 8.21964C19.6075 6.63288 18.3671 5.39249 16.7804 5.07686C16.394 5 15.9293 5 15 5H9C8.07069 5 7.60603 5 7.21964 5.07686C5.63288 5.39249 4.39249 6.63288 4.07686 8.21964C4 8.60603 4 9.07069 4 10" stroke="#000000" strokeWidth="1.5" /> <path d="M20 19V18M4 19V18" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" /> </g>
 
         </svg>
     )
@@ -115,6 +115,25 @@ export const Line3 = ({ className = null }) => (
         />
     </svg>
 )
+
+
+export const SelectedIcon = ({ className = null }) => (
+    <svg
+        width={40}
+        height={40}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+    >
+        <path
+            d="M20 0a20 20 0 1 0 0 40 20 20 0 0 0 0-40Zm9.4 14.356-9.867 13.688a2.022 2.022 0 0 1-2.622.556l-5.667-3.311a2.024 2.024 0 1 1 2.09-3.467l4.022 2.4 8.888-12.2a2 2 0 0 1 3.245 2.222l-.089.112Z"
+            fill="#E64C45"
+        />
+    </svg>
+
+)
+
+
 
 
 

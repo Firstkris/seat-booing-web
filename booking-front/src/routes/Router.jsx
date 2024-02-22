@@ -12,6 +12,7 @@ import PassengerInfo from "../pages/PassengerInfo";
 import { Navigate } from "react-router-dom";
 import NavigatePage from "../pages/NavigatePage";
 import { Outlet } from "react-router-dom";
+import BookingContextProvider from "../context/BookingContext";
 
 const router = createBrowserRouter([
     {
@@ -25,17 +26,18 @@ const router = createBrowserRouter([
     {
         path: '/schedule',
         element: (
-            // <ProtectedRoute>
             <SchedulePage />
-            // </ProtectedRoute>
+
         )
     },
     {
         path: '/passenger-info',
         element: (
-            <ProtectedRoute >
-                <PassengerInfo />
-            </ProtectedRoute>
+            <BookingContextProvider>
+                <ProtectedRoute >
+                    <PassengerInfo />
+                </ProtectedRoute>
+            </BookingContextProvider>
 
         )
 
@@ -44,9 +46,22 @@ const router = createBrowserRouter([
     {
         path: '/seat-select',
         element: (
-            <ProtectedRoute >
-                <SeatSelectPage />
-            </ProtectedRoute>
+            <BookingContextProvider>
+                <ProtectedRoute >
+                    <SeatSelectPage />
+                </ProtectedRoute>
+            </BookingContextProvider>
+        )
+    },
+
+    {
+        path: '/payment',
+        element: (
+            <BookingContextProvider>
+                <ProtectedRoute >
+                    <PaymentPage />
+                </ProtectedRoute>
+            </BookingContextProvider>
         )
     },
 

@@ -12,8 +12,6 @@ function HomePage() {
     const { user, logOut } = useAuthContext()
     return (
         <div className="h-screen overflow-hidden px-8 max-sm:overflow-scroll max-sm:p-8">
-
-
             <div className='flex justify-between items-center gap-4 max-sm:flex-col-reverse sm:h-svh' >
 
                 {/* sign up hero */}

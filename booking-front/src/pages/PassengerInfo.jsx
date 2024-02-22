@@ -1,49 +1,21 @@
 import { Link } from "react-router-dom"
 import Button from "../components/Button"
-import Card from "../components/Card"
-import Input from "../components/Input"
 import Step from "../components/Step"
 import useAuthContext from "../hooks/useAuthContext"
-import useSelectScheduleContext from "../hooks/useSchedule"
-import { useEffect } from "react"
+
+import SummaryCard from "../components/SummaryCard"
+import UserInfoCard from "../components/UserInfoCard"
 
 function PassengerInfo() {
-
-    const { user, selectSchedule, onSelectSchedule } = useAuthContext()
-
-    console.log(selectSchedule);
-
-    const options = {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-    };
-
-    const { origin, destination } = selectSchedule
-
-    // const departureDate = new Date(selectSchedule.departureDate).toLocaleString('en-GB', options)
-    const departureDate = new Date(selectSchedule.departureDate).toLocaleString('th-TH', options)
-    const departTime = new Date(selectSchedule.departTime).toLocaleTimeString([], { hourCycle: 'h24', hour: "2-digit", minute: '2-digit' })
-    console.log(departureDate, departTime);
-
-
-    const getItemFromLocalStorage = () => {
-        const selectedItem = localStorage.getItem('selectedSchedule')
-        onSelectSchedule(JSON.parse(selectedItem))
-    }
-
-    useEffect(() => {
-        getItemFromLocalStorage()
-    }, [])
 
     return (
         <div className="flex flex-col justify-center h-screen gap-12 w-10/12 mx-auto mt-8 ">
             <Step stepItems={3} />
             {/* <form className="h-full"> */}
             <div className="p-6">
-
                 <div className=" grid grid-cols-2 gap-8 h-1/2 max-lg:grid-cols-1">
-                    <div className=" h-3/4">
+
+                    {/* <div className=" h-3/4">
                         <Card btn={false} name={"ข้อมูลผู้โดยสาร"}>
 
                             <hr className="border border-white" />
@@ -57,9 +29,9 @@ function PassengerInfo() {
                             <Input label={'E-mail'} value={user.email} readOnly="read-only"></Input>
 
                         </Card>
-                    </div>
+                    </div> */}
 
-                    <div>
+                    {/* <div>
                         <Card btn={false} bg={false} name={`ข้อมูลเส้นทาง`} >
                             <div className="flex flex-col gap-4 text-base">
 
@@ -96,10 +68,14 @@ function PassengerInfo() {
                             </div>
 
                         </Card>
-                    </div>
+                    </div> */}
+
+                    <UserInfoCard />
+                    <SummaryCard />
 
                 </div>
             </div>
+
 
             <div className="flex justify-around w-1/2 mx-auto gap-16 mt-8 max-lg:flex-col max-lg:w-3/4 max-lg:items-center ">
                 <div className="w-1/2">

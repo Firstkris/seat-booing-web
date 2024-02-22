@@ -6,6 +6,9 @@ function ProtectedRoute({ children }) {
 
     const { user, selectSchedule } = useAuthContext()
 
+    // const isSelect = JSON.parse(localStorage.getItem('selectedSchedule'))
+    // console.log(isSelect);
+
     return (
 
 
