@@ -23,12 +23,17 @@ export const registerSchema = Joi.object({
         'string.empty': "Mobile number is required",
         'string.pattern.base': "Mobile must be at least 10 numbers"
     }),
-    password: Joi.string().pattern(/^[a-z][A-Z][0-9]{6,}$/)
+    password: Joi.string()
+        // .pattern(/^[a-z][A-Z][0-9]{6,}$/)
         .required()
         .messages({
             'string.empty': "Password is required",
             'string.pattern.base': "Password must be at least 6 and contain a-z,A-Z, 0-9"
         }),
+    gender: Joi.string(),
+    birthDate: Joi.date().optional(),
+    address: Joi.string().optional().allow(null, ''),
+    isMember: Joi.boolean().optional()
 
 })
 

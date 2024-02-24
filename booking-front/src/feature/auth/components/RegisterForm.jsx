@@ -49,6 +49,7 @@ function RegisterForm() {
             await register(input)
             toast.success('register success')
 
+
         } catch (error) {
             toast.error(error.response?.data.message)
         }
@@ -161,14 +162,6 @@ function RegisterForm() {
                     ></Input>
 
                 </Card>
-                <div className=" absolute left-0 w-screen -bottom-0 -z-10  max-sm:hidden">
-                    <img
-                        // className="invisible"
-                        src="src/assets/mountain.svg">
-
-                    </img>
-
-                </div>
 
             </div>
 

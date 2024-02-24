@@ -9,10 +9,9 @@ import SchedulePage from "../pages/SchedulePage";
 import RedirectRoute from "./RedirectRoute";
 import ProfilePage from "../pages/ProfilePage";
 import PassengerInfo from "../pages/PassengerInfo";
-import { Navigate } from "react-router-dom";
 import NavigatePage from "../pages/NavigatePage";
-import { Outlet } from "react-router-dom";
 import BookingContextProvider from "../context/BookingContext";
+import SummaryTicket from "../pages/SummaryTicket";
 
 const router = createBrowserRouter([
     {
@@ -21,7 +20,10 @@ const router = createBrowserRouter([
     },
     {
         path: '/register',
-        element: <RegisterPage />
+        element: (
+            <RedirectRoute>
+                <RegisterPage />
+            </RedirectRoute>)
     },
     {
         path: '/schedule',
@@ -69,6 +71,16 @@ const router = createBrowserRouter([
         path: '/profile',
         element: (
             <ProfilePage />
+        )
+    },
+    {
+        path: '/ticket',
+        element: (
+            <BookingContextProvider>
+                <ProtectedRoute >
+                    <SummaryTicket />
+                </ProtectedRoute>
+            </BookingContextProvider>
         )
     },
     {

@@ -12,8 +12,6 @@ function SummaryCard({ seatInfo = false }) {
 
     const [seatCount, setSeatCount] = useState(0)
 
-
-
     const onSetCount = () => {
         const count = Object.keys(bookedSeat).length || 0
         setSeatCount(count)
@@ -22,6 +20,7 @@ function SummaryCard({ seatInfo = false }) {
     const selectSeatCode = []
     for (const key in bookedSeat) {
         if (Object.hasOwnProperty.call(bookedSeat, key)) {
+
             const element = bookedSeat[key].seat.seat_code;
             selectSeatCode.push(element)
 
@@ -55,6 +54,7 @@ function SummaryCard({ seatInfo = false }) {
                             <div className="text-left">
 
                                 <p>เดินทางจาก : </p>
+
                             </div>
                             <div className="text-left col-span-2">
                                 <p className="font-semibold">{origin}</p>
@@ -65,6 +65,7 @@ function SummaryCard({ seatInfo = false }) {
                             <div className="text-left">
 
                                 <p>ปลายทาง : </p>
+
                             </div>
                             <div className="text-left col-span-2">
                                 <p className="font-semibold">{destination}</p>
