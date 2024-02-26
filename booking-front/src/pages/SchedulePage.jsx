@@ -3,6 +3,8 @@ import Step from '../components/Step'
 import SearchCard from '../feature/search/components/SearchCard'
 import useSearchContext from '../hooks/useSearchContext'
 import DateChangeButtonGroup from '../feature/search/components/DateChangeButtonGroup'
+import { Link } from 'react-router-dom'
+import Button from '../components/Button'
 
 
 
@@ -30,6 +32,16 @@ function SchedulePage() {
                 ))}
             </>
 
+            <div className='w-full flex justify-center'>
+
+                <div className="w-4/12">
+                    <Link to={'/'}>
+                        <Button btnBg="btn-primary bg-transparent border-2 hover:bg-primary hover:border-primary" name={'ย้อนกลับ'}></Button>
+                    </Link>
+
+                </div>
+
+            </div>
 
         </div>
     )

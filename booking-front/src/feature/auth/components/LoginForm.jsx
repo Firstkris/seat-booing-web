@@ -46,7 +46,7 @@ function LoginForm() {
         <form className='text-center flex flex-col gap-6 p-4' onSubmit={handleSubmit}>
 
             <Input label={"Email"} name={"email"} value={input.email} onChange={handleChangeInput} errorMsg={error.email} vertical={true} />
-            <Input label={"Password"} name={"password"} value={input.password} onChange={handleChangeInput} errorMsg={error.password} vertical={true} />
+            <Input type={'password'} label={"Password"} name={"password"} value={input.password} onChange={handleChangeInput} errorMsg={error.password} vertical={true} />
             <div className='h-8 mt-4'>
                 <Button name={"Login"} onClick={handleSubmit} ></Button>
             </div>

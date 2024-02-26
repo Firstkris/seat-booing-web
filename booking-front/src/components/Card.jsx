@@ -1,7 +1,7 @@
 
 import Button from "../components/Button"
 
-function Card({ children, name, onSubmit, btn = true, bg = true }) {
+function Card({ children, name, onSubmit, btn = true, bg = true, btnName, isEdit = true }) {
 
     const bgStyle = bg ? `bg-primary` : `border-2 border-primary`
 
@@ -14,13 +14,17 @@ function Card({ children, name, onSubmit, btn = true, bg = true }) {
                     <h2 className="text-4xl font-bold max-sm:text-xl ">{name}</h2>
                     {children}
 
-                    {btn &&
-                        (
-                            <div className="mt-8 max-sm:mt-2">
-                                <Button name="ลงทะเบียน"></Button>
-                            </div>
-                        )
-                    }
+                    {isEdit ? <>
+
+                        {btn &&
+                            (
+                                <div className="mt-8 max-sm:mt-2">
+                                    <Button name={btnName}></Button>
+                                </div>
+                            )
+                        }    </>
+
+                        : ""}
 
 
                 </div>

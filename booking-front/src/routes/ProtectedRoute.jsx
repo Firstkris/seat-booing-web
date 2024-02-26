@@ -11,9 +11,8 @@ function ProtectedRoute({ children }) {
 
     return (
 
-
         user
-            ? (Object.keys(selectSchedule).length !== 0 ? children : <Navigate to={'/'} />)
+            ? (Object?.keys(selectSchedule)?.length !== 0 ? children : <Navigate to={'/'} />)
             : (<>
 
                 <div className="flex items-center h-screen">

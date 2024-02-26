@@ -1,15 +1,18 @@
 import { useState } from "react"
 import { createContext } from "react"
-import { createBooking, createBookingDetail, findAllAvailableSeat, updateAvailableSeatAmount, updateSeatStatus } from "../api/booking"
-import useAuthContext from "../hooks/useAuthContext"
+import { createBooking, createBookingDetail, deleteBookingDetail, findAllAvailableSeat, getBookedSeatByScheduleId, getMyBookingData, updateAvailableSeatAmount, updateSeatStatus } from "../api/booking"
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 export const BookingContext = createContext()
 function BookingContextProvider({ children }) {
 
     const [availableSeat, setAvailableSeat] = useState([])
     const [bookedSeat, setBookedSeat] = useState({})
+    const [alreadyBookSeat, setAlreadyBookSeat] = useState([])
     const [isClick, setIsClick] = useState(false)
+    const [bookingData, setBookingData] = useState()
+    // const [bookedSeat, setBookedSeat] = useState([])
     const navigate = useNavigate()
 
     const checkIsClick = () => {
@@ -25,11 +28,10 @@ function BookingContextProvider({ children }) {
         delete bookedSeat[id]
     }
 
-    console.log(bookedSeat);
-
-    const getAllAvailableSeat = async (searchData) => {
-        const res = await findAllAvailableSeat(searchData)
-        setAvailableSeat(res.data.allSeat)
+    const getMyBooking = async () => {
+        const res = await getMyBookingData()
+        setBookingData(res.data.myBooking)
+        console.log(res)
     }
 
     const onConfirmBooking = async (bookingData) => {
@@ -42,10 +44,10 @@ function BookingContextProvider({ children }) {
             for (const key in bookedSeat) {
                 if (Object.hasOwnProperty.call(bookedSeat, key)) {
                     const seatId = key;
-                    const status = bookedSeat[key].status
+                    // const status = bookedSeat[key].status
                     const bookingDetail = await createBookingDetail(bookingId, +seatId)
                     console.log(bookingDetail);
-                    await updateSeatStatus(seatId, status)
+                    // await updateSeatStatus(seatId, status)
                 }
             }
 
@@ -60,6 +62,28 @@ function BookingContextProvider({ children }) {
 
     }
 
+    const getAllAvailableSeat = async (searchData) => {
+        const res = await findAllAvailableSeat(searchData)
+        setAvailableSeat(res.data.allSeat)
+    }
+
+    const getAlreadyBookedSeat = async (scheduleId) => {
+        const res = await getBookedSeatByScheduleId(scheduleId)
+        console.log(res.data.alreadyBookedSeat, 'getAlreadyBookedSeat');
+        setAlreadyBookSeat(res.data.alreadyBookedSeat)
+    }
+
+    const onDeleteBooking = async (bookingId, seatId) => {
+        console.log(bookingId, seatId);
+        const res = await deleteBookingDetail(bookingId, seatId)
+        getMyBooking()
+
+    }
+
+    useEffect(() => {
+        getMyBooking()
+    }, [])
+
 
     const sharedObj = {
         getAllAvailableSeat,
@@ -69,7 +93,12 @@ function BookingContextProvider({ children }) {
         onCancelSeat,
         checkIsClick,
         isClick,
-        onConfirmBooking
+        onConfirmBooking,
+        bookingData,
+        getAlreadyBookedSeat,
+        alreadyBookSeat,
+        onDeleteBooking,
+
     };
     return (
         <BookingContext.Provider value={sharedObj}>

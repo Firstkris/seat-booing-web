@@ -1,14 +1,30 @@
 import useAuthContext from '../hooks/useAuthContext'
-import Card from '../components/Card'
-import UserInfoCard from '../components/UserInfoCard'
+import PersonalInfo from '../components/PersonalInfo'
+import { Link } from 'react-router-dom'
+import Loading from '../components/Loading'
+import { useState } from 'react'
+
 
 function ProfilePage() {
 
-    const { user } = useAuthContext()
+    const [isLoading, setLoading] = useState(false)
+    // const { user } = useAuthContext()
+
+    if (isLoading) return <Loading />
 
     return (
-        <div className='h-screen'>
-            <UserInfoCard />
+        <div>
+
+            <div className='h-screen w-8/12 mx-auto my-6'>
+                <Link to={"/"} className='col-span-1'> &#60; Back</Link>
+                {/* <UserInfoCard /> */}
+                <PersonalInfo setLoading={setLoading} />
+
+                {/* <div className='w-full flex justify-center mt-8'>
+
+                </div> */}
+
+            </div>
         </div>
     )
 }

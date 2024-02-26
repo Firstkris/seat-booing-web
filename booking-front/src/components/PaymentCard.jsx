@@ -4,10 +4,11 @@ import useBookingContext from '../hooks/useBookingContext'
 import { OriginToDes } from '../icon'
 import { Link } from 'react-router-dom'
 import Button from './Button'
+import Loading from './Loading'
 
 
 function PaymentCard() {
-    const { selectSchedule } = useAuthContext()
+    const { selectSchedule, isLoading, setLoading } = useAuthContext()
     const { bookedSeat, onConfirmBooking } = useBookingContext()
     const { origin, destination } = selectSchedule
     console.log(selectSchedule);
@@ -29,11 +30,22 @@ function PaymentCard() {
 
     }
 
-    const onSubmitBooking = (e) => {
+    const onSubmitBooking = async (e) => {
         e.preventDefault()
-        onConfirmBooking(bookingData)
+        // setLoading(true)
+        console.log(bookingData);
+        if (Object.keys(bookingData.bookedSeat).length !== 0) {
+            console.log('NO');
+            await onConfirmBooking(bookingData)
+            setTimeout(() => { setLoading(false) }, [500])
+        } else {
+            alert('You have to choose a seat ')
+        }
+
+
     }
 
+    if (isLoading) return <Loading />
 
     return (
         <>

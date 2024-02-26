@@ -69,7 +69,9 @@ function RegisterForm() {
             <div className='col-span-10 '>
                 <Card
                     onSubmit={handleSubmit}
-                    name={"สมัครสมาชิก"} >
+                    name={"สมัครสมาชิก"}
+                    btnName={"ลงทะเบียน"}
+                >
 
                     {/* mobile & email */}
                     <div className="flex justify-between gap-4 max-sm:flex-col max-sm:gap-1">
@@ -94,6 +96,7 @@ function RegisterForm() {
                         name="password"
                         label={"Password"}
                         errorMsg={error.password}
+                        type={'password'}
 
                     >
                     </Input>

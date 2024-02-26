@@ -12,6 +12,7 @@ function SearchContextProvider({ children }) {
 
     const [schedule, setSchedule] = useState([])
 
+
     const onSetSchedule = (newSchedule) => {
         setSchedule(newSchedule)
     }

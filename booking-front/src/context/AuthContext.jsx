@@ -20,6 +20,18 @@ function AuthContextProvider({ children }) {
         setToken(res.data.accessToken)
     }
 
+    const editUserData = async (user) => {
+        try {
+            const res = await authApi.updateuser(user)
+            console.log(res.data.updateData);
+            setUser(prv => ({ ...prv, ["isMember"]: res.data.updateData.isMember }))
+
+
+        } catch (error) {
+            toast.error(error.response?.data.message)
+        }
+    }
+
     const login = async (loginData) => {
         const res = await authApi.login(loginData)
 
@@ -81,7 +93,9 @@ function AuthContextProvider({ children }) {
         logOut,
         isLoading,
         onSelectSchedule,
-        selectSchedule
+        selectSchedule,
+        editUserData,
+        setLoading
     };
 
 
