@@ -36,6 +36,7 @@ model User {
   address     String?
   createAt    DateTime  @default(now()) @map("create_at") @db.Timestamp(0)
   updateAt    DateTime  @updatedAt @map("update_at") @db.Timestamp(0)
+  isMember    Boolean?  @default(true)
   paymentInfo String?
   booking     Booking[]
 
@@ -43,11 +44,15 @@ model User {
 }
 
 model Booking {
-  id       Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+
   createAt DateTime @default(now()) @map("create_at") @db.Timestamp(0)
   updateAt DateTime @updatedAt @map("update_at") @db.Timestamp(0)
   userId   Int      @map("user_id")
-  User     User     @relation(fields: [userId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  schedule   Schedule @relation(fields: [scheduleId], references: [id])
+  scheduleId Int      @map("shedule_id")
 
   bookingDetail BookingDetail[]
 
@@ -60,6 +65,9 @@ model BookingDetail {
   booking   Booking @relation(fields: [bookingId], references: [id])
   bookingId Int     @map("booking_id")
 
+  seat   Seat @relation(fields: [seatId], references: [id])
+  seatId Int  @map("seat_id")
+
   @@map("booking_detail")
 }
 
@@ -70,12 +78,13 @@ model Schedule {
   departTime    DateTime        @db.Time()
   arrivalTime   DateTime        @db.Time()
   departureDate DateTime        @db.Date
-  price         Decimal         @db.Decimal()
+  price         Decimal         @db.Decimal(10, 0)
   seatAvailable Int             @map("seat_available")
   status        ScheduleStatus?
 
-  busId Int @map("bus_id")
-  bus   Bus @relation(fields: [busId], references: [id])
+  busId   Int       @map("bus_id")
+  bus     Bus       @relation(fields: [busId], references: [id])
+  booking Booking[]
 
   @@map("schedule")
 }
@@ -91,14 +100,15 @@ model Bus {
 }
 
 model Seat {
-  id        Int     @id @default(autoincrement())
-  status    Boolean
-  seat_code String  @db.VarChar(3)
-  seat_col  String  @db.VarChar(2)
-  seat_row  String  @db.VarChar(2)
+  id       Int     @id @default(autoincrement())
+  status   Boolean
+  seatCode String  @map("seat_code") @db.VarChar(3)
+  seatCol  String  @map("seat_col") @db.VarChar(2)
+  seatRow  String  @map("seat_row") @db.VarChar(2)
 
-  bus   Bus @relation(fields: [busId], references: [id])
-  busId Int @map("busId")
+  bus           Bus             @relation(fields: [busId], references: [id])
+  busId         Int             @map("busId")
+  BookingDetail BookingDetail[]
 
   @@map("seat")
 }

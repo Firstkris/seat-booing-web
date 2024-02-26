@@ -1,8 +1,8 @@
 const encryptService = require("../services/encrypt-service");
-const { createUser, findUserByUniqueData } = require("../services/user-service");
+const { createUser, findUserByUniqueData, updateUserData } = require("../services/user-service");
 const { catchError } = require("../utilities/catch-error");
 const { createError } = require("../utilities/create-error");
-const jwtService = require("../utilities/jwt-service");
+const jwtService = require("../services/jwt-service");
 
 
 exports.register = catchError(
@@ -54,11 +54,17 @@ exports.login = catchError(
 )
 
 
-exports.getMe = catchError(
+exports.getMe = async (req, res, next) => {
+    res.status(200).json({ user: req.user })
+}
 
+exports.updateUser = catchError(
     async (req, res, next) => {
-
+        console.log(req.body);
+        const updateData = await updateUserData(req.body, req.user.id)
+        res.status(200).json({ updateData })
     }
 )
+
 
 

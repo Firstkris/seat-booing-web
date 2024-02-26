@@ -11,3 +11,17 @@ exports.findSchedule = (origin, destination, departureDate) => prisma.schedule.f
         AND: [{ origin }, { destination }, { departureDate }]
     },
 })
+
+
+exports.findAllAvailableSeatInSchedule = (date, scheduleId) => prisma.$queryRaw`
+SELECT 
+    *
+FROM
+    schedule
+        JOIN
+    bus ON bus_id = bus.id
+        JOIN
+    seat ON bus.id = seat.busId
+WHERE departureDate = ${date} AND schedule.id = ${scheduleId}
+`
+

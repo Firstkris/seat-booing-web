@@ -15,6 +15,7 @@ const registerSchema = Joi.object({
         'string.pattern.base': "ID number must be 13 numbers"
     }),
     gender: Joi.string().valid(...genderEnum),
+    birthDate: Joi.date().optional(),
     email: Joi.string().email({ tlds: false }).required().trim().message({
         'string.empty': "email is required"
     }),
@@ -28,7 +29,8 @@ const registerSchema = Joi.object({
             'string.empty': "is required",
             'string.pattern.base': "must be at least 6 and contain a-z, 0-9"
         }),
-    address: Joi.string()
+    address: Joi.string().optional().allow(null, ''),
+    isMember: Joi.boolean().optional()
 
 })
 
