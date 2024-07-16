@@ -1,5 +1,5 @@
 const { schedule } = require("../models/prisma");
-const { updateSeatStatusBySeatId, createNewBooking, createBookingData, createNewBookingDetailData, updateSeatAvailableAmount, getMyBookingData, findBookingSeatInSchedule, deleteBookingDetail, getBookingDetailId } = require("../services/booking-service");
+const { updateSeatStatusBySeatId, createNewBooking, createBookingData, createNewBookingDetailData, updateSeatAvailableAmount, getMyBookingData, findBookingSeatInSchedule, deleteBookingDetail, getBookingDetailId, editBooking } = require("../services/booking-service");
 const { findAllAvailableSeatInSchedule } = require("../services/search-service");
 const { catchError } = require("../utilities/catch-error");
 
@@ -80,12 +80,22 @@ exports.getAllBookingSeatByScheduleId = catchError(
 
 exports.deleteBooking = catchError(
     async (req, res, next) => {
-        const { bookingId, seatId } = req.body
-        const bookingDetail = await getBookingDetailId(bookingId, seatId)
-        // console.log(bookingDetail.id);
+        const { bookingDetailId, scheduleId } = req.body
+        const num = 1
 
-        const deletedBooking = await deleteBookingDetail(bookingDetail.id)
+        const deletedBooking = await deleteBookingDetail(bookingDetailId)
+        const updateSeatAvailable = await updateSeatAvailableAmount(scheduleId, num)
 
         res.status(200).json({ deletedBooking })
+    }
+)
+
+exports.editBookingByBookingDetailId = catchError(
+    async (req, res, next) => {
+        console.log(req.body);
+        const { bookingDetailId, seatId } = req.body
+        const editedBooking = await editBooking(bookingDetailId, seatId)
+
+        res.status(200).json({ editedBooking })
     }
 )

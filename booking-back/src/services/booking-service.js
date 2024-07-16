@@ -27,29 +27,19 @@ WHERE
     schedule.id = ${scheduleId}
 `
 
-exports.updateSeatStatusBySeatId = (seatId, status) => prisma.$queryRaw`
-UPDATE seat
-JOIN 
-	bus ON bus.id  = seat.busId
-    JOIN 
-    schedule ON schedule.bus_id = bus.id
-SET seat.status = ${status}
-WHERE seat.id = ${seatId}
-`
-
 exports.createNewBookingDetailData = (data) => prisma.bookingDetail.create({ data })
 
 exports.createBookingData = (data) => prisma.booking.create({ data })
 
 exports.updateSeatAvailableAmount = (scheduleId, num) => prisma.schedule.update({
     where: { id: scheduleId },
-    data: { seatAvailable: { decrement: +num } }
+    data: { seatAvailable: { increment: +num } }
 })
 
 
 exports.getMyBookingData = (id) => prisma.$queryRaw`
 SELECT DISTINCT
-DISTINCT booking_id, seat_id, seat_code,shedule_id,departureDate, origin, destination,departTime,user_id
+DISTINCT booking_id, seat_id,booking_detail.id booking_detail_id, seat_code,shedule_id,departureDate, origin, destination,departTime,user_id
 FROM
     booking_detail
         LEFT JOIN
@@ -61,6 +51,7 @@ FROM
     JOIN 
     seat ON booking_detail.seat_id = seat.id
 WHERE user_id = ${id} 
+ORDER BY departureDate DESC
 `
 
 exports.deleteBookingDetail = (id) => prisma.bookingDetail.delete({
@@ -70,3 +61,15 @@ exports.deleteBookingDetail = (id) => prisma.bookingDetail.delete({
 exports.getBookingDetailId = (bookingId, seatId) => prisma.bookingDetail.findFirst({
     where: { AND: [{ bookingId }, { seatId }] }
 })
+
+exports.editBooking = (id, seatId) => prisma.bookingDetail.update({ data: { seatId }, where: { id } })
+
+// exports.updateSeatStatusBySeatId = (seatId, status) => prisma.$queryRaw`
+// UPDATE seat
+// JOIN 
+// 	bus ON bus.id  = seat.busId
+//     JOIN 
+//     schedule ON schedule.bus_id = bus.id
+// SET seat.status = ${status}
+// WHERE seat.id = ${seatId}
+// `

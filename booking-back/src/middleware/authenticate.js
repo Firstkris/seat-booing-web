@@ -8,7 +8,7 @@ exports.authenticate = catchError(
 
     async (req, res, next) => {
 
-        console.log(req);
+        // console.log(req);
         const authorization = req.headers.authorization;
 
         if (!authorization || !authorization.startsWith('Bearer ')) {

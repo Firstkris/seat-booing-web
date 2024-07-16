@@ -8,6 +8,7 @@ const {
     getMyBooking,
     getAllBookingSeatByScheduleId,
     deleteBooking,
+    editBookingByBookingDetailId,
 } = require("../controllers/booking_controller");
 const { authenticate } = require('../middleware/authenticate')
 
@@ -23,5 +24,6 @@ bookingRoute.patch('/update-available-amount', authenticate, updateSeatAvailable
 bookingRoute.get('/my-booking', authenticate, getMyBooking)
 bookingRoute.post('/all-booked-seat-schedule-id', getAllBookingSeatByScheduleId)
 bookingRoute.delete('/delete-booking', authenticate, deleteBooking)
+bookingRoute.patch('/edit-booking', authenticate, editBookingByBookingDetailId)
 
 module.exports = bookingRoute
