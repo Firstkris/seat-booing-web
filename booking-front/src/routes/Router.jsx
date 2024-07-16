@@ -71,9 +71,7 @@ const router = createBrowserRouter([
         path: '/profile',
         element: (
             <BookingContextProvider>
-
                 <ProfilePage />
-
             </BookingContextProvider>
 
         )

@@ -3,12 +3,17 @@ import PersonalInfo from '../components/PersonalInfo'
 import { Link } from 'react-router-dom'
 import Loading from '../components/Loading'
 import { useState } from 'react'
+import { useEffect } from 'react'
 
 
 function ProfilePage() {
 
     const [isLoading, setLoading] = useState(false)
-    // const { user } = useAuthContext()
+
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => { setLoading(false) }, [400])
+    }, [])
 
     if (isLoading) return <Loading />
 

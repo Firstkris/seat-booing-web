@@ -1,10 +1,9 @@
-
 function Button({
     name,
     icon,
     onClick,
-    width = "w-full",
-    btnBg = "btn-secondary text-white",
+    width = 'w-full',
+    btnBg = 'btn-secondary text-white',
     children,
 }) {
     return (
@@ -12,7 +11,7 @@ function Button({
             <button
                 onClick={onClick}
                 // onClick=<Navigate to="/register" />
-                className={`btn ${btnBg} rounded-r-full h-fit rounded-l-full ${width}  font-extrabold max-sm:text-base  max-sm:h-8`}
+                className={`btn ${btnBg} rounded-r-full h-fit rounded-l-full ${width}  font-extrabold max-sm:text-base  max-sm:h-8 tracking-wider`}
             >
                 {icon && <span>{icon}</span>}
                 {name}
@@ -22,4 +21,4 @@ function Button({
     );
 }
 
-export default Button
+export default Button;

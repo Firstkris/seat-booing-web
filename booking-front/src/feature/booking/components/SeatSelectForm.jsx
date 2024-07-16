@@ -1,10 +1,22 @@
-import { useEffect } from 'react'
-import useBookingContext from '../../../hooks/useBookingContext'
-import SeatItems from './SeatItems'
+import { useEffect } from 'react';
+import useBookingContext from '../../../hooks/useBookingContext';
+import SeatItems from './SeatItems';
+import { useState } from 'react';
 
-function SeatSelectForm() {
-
+function SeatSelectForm({ booking_detail_id }) {
     // const { user, selectSchedule } = useAuthContext()
+    const [maxSeat, setMaxSeat] = useState();
+    const [count, setCount] = useState(0);
+
+    // useEffect(() => {
+    //     if (booking_detail_id.isEdit) {
+    //         setMaxSeat(1)
+    //     }
+    //     else {
+    //         setMaxSeat(30)
+    //     }
+    // }, [])
+
     const {
         availableSeat,
         getAllAvailableSeat,
@@ -13,76 +25,59 @@ function SeatSelectForm() {
         alreadyBookSeat,
     } = useBookingContext();
 
+    // console.log(alreadyBookSeat.length);
 
-    const filterAvailableSeat = availableSeat.map(el => {
+    const filterAvailableSeat = availableSeat.map((el) => {
         let checkAvailableSeat;
         if (alreadyBookSeat.length > 0) {
             for (let i = 0; i < alreadyBookSeat.length; i++) {
-
                 if (el.id === alreadyBookSeat?.[i].seat_id) {
-                    console.log(alreadyBookSeat);
-                    console.log(alreadyBookSeat[i].seat_id);
-                    el.newStatus = true
-                    checkAvailableSeat = <SeatItems key={el.id} seat={el} />
-
-                }
-                else {
-                    checkAvailableSeat = <SeatItems key={el.id} seat={el} />
+                    // console.log(alreadyBookSeat);
+                    // console.log(alreadyBookSeat[i].seat_id);
+                    el.newStatus = true;
+                    checkAvailableSeat = (
+                        <SeatItems
+                            key={el.id}
+                            seat={el}
+                            maxSeat={maxSeat}
+                            setCount={setCount}
+                        />
+                    );
+                } else {
+                    checkAvailableSeat = (
+                        <SeatItems
+                            key={el.id}
+                            seat={el}
+                            maxSeat={maxSeat}
+                            setCount={setCount}
+                        />
+                    );
                 }
             }
         } else {
-            checkAvailableSeat = <SeatItems key={el.id} seat={el} />
+            checkAvailableSeat = (
+                <SeatItems
+                    key={el.id}
+                    seat={el}
+                />
+            );
         }
 
-        return checkAvailableSeat
-    })
+        return checkAvailableSeat;
+    });
 
-
-    // const filterAvailableSeat = availableSeat.map(el => {
-
-    //     const test = alreadyBookSeat.filter((bookedSeat) => {
-    //         if (bookedSeat.seat_id !== 28) {
-    //             return (
-    //                 <SeatItems key={el.id} seat={el} />
-    //             )
-    //         } else {
-    //             return (
-    //                 <SeatItems key={el.id} seat={el} />
-    //             )
-    //         }
-
-    //     })
-    //     console.log(test);
-
-
-    // }
-    // )
-
-    // const isAlreadyBooked = alreadyBookSeat.filter((bookedSeat) => {
-    //     if (bookedSeat.seat_id !== 28) return true
-    //     return false
-    // })
-
-
-    // console.log(isAlreadyBooked);
-
-    const isSelect = JSON.parse(localStorage.getItem('selectedSchedule'))
+    const isSelect = JSON.parse(localStorage.getItem('selectedSchedule'));
     const searchData = {
         departureDate: new Date(isSelect.departureDate),
-        scheduleId: isSelect.id
-    }
-
-    // setInterval(() => {
-    //     getAllAvailableSeat(searchData)
-    // }, 1e3 * 60)
+        scheduleId: isSelect.id,
+    };
 
     useEffect(() => {
         if (Object.keys(isSelect).length > 0) {
-            getAllAvailableSeat(searchData)
-            getAlreadyBookedSeat(isSelect.id)
+            getAllAvailableSeat(searchData);
+            getAlreadyBookedSeat(isSelect.id);
         }
-
-    }, [isClick])
+    }, [isClick]);
 
     return (
         <div className='w-full h-full grid grid-rows-10 grid-flow-col justify-around'>
@@ -91,9 +86,8 @@ function SeatSelectForm() {
             ))} */}
 
             {filterAvailableSeat}
-
         </div>
-    )
+    );
 }
 
-export default SeatSelectForm
+export default SeatSelectForm;

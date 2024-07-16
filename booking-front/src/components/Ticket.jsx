@@ -9,9 +9,9 @@ function Ticket({ items, onDeactivateBooking, onEditBooking }) {
         origin,
         destination,
         seat_code,
-
-
     } = items;
+
+
 
     const options = {
         weekday: "long",
@@ -23,13 +23,13 @@ function Ticket({ items, onDeactivateBooking, onEditBooking }) {
     const departTime = new Date(items.departTime).toLocaleTimeString([], { hourCycle: 'h24', hour: "2-digit", minute: '2-digit' })
 
     const hdlOnDeactivateBooking = () => {
-        console.log(items);
         onDeactivateBooking(items)
     }
 
     const hdlOnEditBooking = () => {
-        onEditBooking()
+        onEditBooking(items)
     }
+
 
 
 

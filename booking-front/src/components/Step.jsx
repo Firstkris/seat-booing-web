@@ -1,22 +1,28 @@
 function Step({ stepItems }) {
-
-    const renderedStep = []
+    const renderedStep = [];
 
     for (let i = 0; i < stepItems; i++) {
-
-        renderedStep.push(<li className="step step-primary" key={stepItems - i} ></li>)
+        renderedStep.push(
+            <li
+                className='step step-primary'
+                key={stepItems - i}
+            ></li>
+        );
     }
     for (let i = 0; i < 5 - stepItems; i++) {
-        renderedStep.push(<li className="step" key={stepItems + i + 1} ></li>)
+        renderedStep.push(
+            <li
+                className='step'
+                key={stepItems + i + 1}
+            ></li>
+        );
     }
 
     return (
         <>
-            <ul className="steps ">
-                {renderedStep}
-            </ul>
+            <ul className='steps '>{renderedStep}</ul>
         </>
-    )
+    );
 }
 
-export default Step
+export default Step;

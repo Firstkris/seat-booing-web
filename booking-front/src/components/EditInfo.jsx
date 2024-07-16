@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function EditInfo() {
-    return (
-        <div>EditInfo</div>
-    )
+    return <div>EditInfo</div>;
 }
 
-export default EditInfo
+export default EditInfo;

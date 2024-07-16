@@ -1,39 +1,40 @@
-
-import { useNavigate } from 'react-router-dom'
-import { OriginToDes } from '../icon'
-import Button from './Button'
-import useAuthContext from '../hooks/useAuthContext'
+import { useNavigate } from 'react-router-dom';
+import { OriginToDes } from '../icon';
+import Button from './Button';
+import useAuthContext from '../hooks/useAuthContext';
 
 function ScheduleCard({ items }) {
-
-    const navigate = useNavigate()
-    const { onSelectSchedule } = useAuthContext()
+    const navigate = useNavigate();
+    const { onSelectSchedule } = useAuthContext();
     // const { onSelectSchedule } = useSelectScheduleContext()
 
-    const { origin,
-        destination,
-        price
+    const { origin, destination, price, seatAvailable } = items;
+    // console.log(items);
 
-    } = items
-
-    const departTime = new Date(items.departTime).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
-    const arrivalTime = new Date(items.arrivalTime).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })
+    const departTime = new Date(items.departTime).toLocaleTimeString('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+    const arrivalTime = new Date(items.arrivalTime).toLocaleTimeString(
+        'en-GB',
+        { hour: '2-digit', minute: '2-digit' }
+    );
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         console.log(items);
-        onSelectSchedule(items)
-        navigate('/passenger-info')
-    }
+        onSelectSchedule(items);
+        navigate('/passenger-info');
+    };
 
     return (
         <>
             <form onSubmit={handleSubmit}>
-
                 <Button
-                    btnBg={"bg-base-100 border-primary border-2 hover:bg-primary hover:border-primary text-2xl "} >
-
-
+                    btnBg={
+                        'bg-base-100 border-primary border-2 hover:bg-primary hover:border-primary text-2xl '
+                    }
+                >
                     <div className='text-black flex justify-between items-center w-full p-6'>
                         <div className='flex flex-col gap-4 w-full justify-center items-center text-base font-semibold max-lg: '>
                             <p>{origin}</p>
@@ -45,17 +46,17 @@ function ScheduleCard({ items }) {
                             <OriginToDes />
                             <p>{arrivalTime}</p>
                         </div>
-                        <div className='flex justify-center items-center font-extrabold grow w-full'>
+                        <div className='flex flex-col gap-4 justify-center items-center font-extrabold grow w-full'>
                             <p>฿ {price}</p>
+                            <p className='text-sm font-base'>
+                                จำนวนที่นั่งเหลือ : {seatAvailable}
+                            </p>
                         </div>
                     </div>
-
                 </Button>
-
-
             </form>
         </>
-    )
+    );
 }
 
-export default ScheduleCard
+export default ScheduleCard;

@@ -1,90 +1,87 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { createContext } from 'react'
-import { toast } from 'react-toastify'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { createContext } from 'react';
+import { toast } from 'react-toastify';
 
-import * as authApi from '../api/auth.js'
-import { clearToken, getToken, setToken } from '../utilities/local-storage.js'
+import * as authApi from '../api/auth.js';
+import { clearToken, getToken, setToken } from '../utilities/local-storage.js';
 
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 function AuthContextProvider({ children }) {
-
-    const [user, setUser] = useState()
-    const [isLoading, setLoading] = useState(true)
-    const [selectSchedule, setSelectSchedule] = useState({})
+    const [user, setUser] = useState();
+    const [isLoading, setLoading] = useState(true);
+    const [selectSchedule, setSelectSchedule] = useState({});
 
     const register = async (user) => {
         console.log(user);
-        const res = await authApi.register(user)
-        setUser(res.data.newUser)
-        setToken(res.data.accessToken)
-    }
+        const res = await authApi.register(user);
+        setUser(res.data.newUser);
+        setToken(res.data.accessToken);
+    };
 
     const editUserData = async (user) => {
         try {
-            const res = await authApi.updateuser(user)
+            const res = await authApi.updateuser(user);
             console.log(res.data.updateData);
-            setUser(prv => ({ ...prv, ["isMember"]: res.data.updateData.isMember }))
-
-
+            setUser((prv) => ({
+                ...prv,
+                ['isMember']: res.data.updateData.isMember,
+            }));
         } catch (error) {
-            toast.error(error.response?.data.message)
+            toast.error(error.response?.data.message);
         }
-    }
+    };
 
     const login = async (loginData) => {
-        const res = await authApi.login(loginData)
+        const res = await authApi.login(loginData);
 
-        setTimeout(() => { }, 1000)
-        setUser(res.data.user)
-        setToken(res.data.accessToken)
-    }
+        setTimeout(() => {}, 1000);
+        setUser(res.data.user);
+        setToken(res.data.accessToken);
+    };
 
     const logOut = () => {
-        setUser(null)
-        clearToken()
-        localStorage.clear()
-    }
+        setUser(null);
+        clearToken();
+        localStorage.clear();
+    };
 
     const getUserByToken = async () => {
         try {
-            setTimeout(() => { setLoading(false) }, 500)
-            const res = await authApi.fetchUser()
-            setUser(res.data.user)
-
-
+            setTimeout(() => {
+                setLoading(false);
+            }, 500);
+            const res = await authApi.fetchUser();
+            setUser(res.data.user);
         } catch (error) {
-            toast.error(error.response?.data.message)
+            toast.error(error.response?.data.message);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-
-    }
+    };
 
     const onSelectSchedule = (item) => {
-        localStorage.setItem('selectedSchedule', JSON.stringify(item))
-        setSelectSchedule(item)
-    }
+        localStorage.setItem('selectedSchedule', JSON.stringify(item));
+        setSelectSchedule(item);
+    };
 
     const getItemFromLocalStorage = () => {
-        const selectedItem = localStorage.getItem('selectedSchedule')
-        onSelectSchedule(JSON.parse(selectedItem))
-    }
+        const selectedItem = localStorage.getItem('selectedSchedule');
+        onSelectSchedule(JSON.parse(selectedItem));
+    };
 
     useEffect(() => {
-
-        getItemFromLocalStorage()
-    }, [])
-
+        getItemFromLocalStorage();
+    }, []);
 
     useEffect(() => {
-        const token = getToken()
-        getItemFromLocalStorage()
-        if (token) getUserByToken()
-        setTimeout(() => { setLoading(false) }, 500)
-    }, [])
-
-
+        const token = getToken();
+        getItemFromLocalStorage();
+        if (token) getUserByToken();
+        setTimeout(() => {
+            setLoading(false);
+        }, 500);
+    }, []);
 
     const sharedOgj = {
         register,
@@ -95,15 +92,14 @@ function AuthContextProvider({ children }) {
         onSelectSchedule,
         selectSchedule,
         editUserData,
-        setLoading
+        setLoading,
     };
-
 
     return (
         <AuthContext.Provider value={sharedOgj}>
             {children}
         </AuthContext.Provider>
-    )
+    );
 }
 
-export default AuthContextProvider
+export default AuthContextProvider;
