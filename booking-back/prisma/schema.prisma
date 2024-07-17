@@ -6,7 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  // provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -32,7 +33,8 @@ model User {
   mobile      String    @unique
   password    String
   gender      Gender    @default(NOTTELL)
-  birthDate   DateTime? @db.Date()
+  birthDate   DateTime?
+  // birthDate   TimeS? @db.Date()
   address     String?
   createAt    DateTime  @default(now()) @map("create_at") @db.Timestamp(0)
   updateAt    DateTime  @updatedAt @map("update_at") @db.Timestamp(0)
@@ -75,8 +77,8 @@ model Schedule {
   id            Int             @id @default(autoincrement())
   origin        String
   destination   String
-  departTime    DateTime        @db.Time()
-  arrivalTime   DateTime        @db.Time()
+  departTime    DateTime
+  arrivalTime   DateTime
   departureDate DateTime        @db.Date
   price         Decimal         @db.Decimal(10, 0)
   seatAvailable Int             @map("seat_available")
