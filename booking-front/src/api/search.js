@@ -18,7 +18,7 @@ export const getRoute = async (route, start) => {
 
 export const getSchedule = async (searchData) => {
     try {
-        const result = axios.post(`${URL}/search`, searchData);
+        const result = await axios.post(`${URL}/search`, searchData);
         return result;
     } catch (error) {
         toast.error(error.response.data.message);
