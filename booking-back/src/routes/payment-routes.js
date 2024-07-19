@@ -1,10 +1,10 @@
-const express = require('express');
+// const express = require('express');
 
-const { paymentController } = require('../controllers/payment-controller');
+// const { paymentController } = require('../controllers/payment-controller');
 
-const paymentRoute = express.Router();
+// const paymentRoute = express.Router();
 
-searchRoute.post('/create-payment-intent', paymentController);
-// searchRoute.post('/all-booked-seat-schedule-id', getAllBookingSeatByScheduleId)
+// searchRoute.post('/create-payment-intent', paymentController);
+// // searchRoute.post('/all-booked-seat-schedule-id', getAllBookingSeatByScheduleId)
 
-module.exports = paymentRoute;
+// module.exports = paymentRoute;

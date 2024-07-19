@@ -1,6 +1,6 @@
 const { paymentService } = require('../services/payment-service');
 
-export const paymentController = {};
+exports.paymentController = {};
 
 paymentController.createPaymentIntent = async (req, res) => {
     const { amount } = req.body;

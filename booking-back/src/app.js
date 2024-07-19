@@ -15,7 +15,7 @@ app.use(express.json());
 app.use('/auth', authRoute);
 app.use('/search', searchRoute);
 app.use('/booking', bookingRoute);
-app.use('/payment', paymentRoute);
+// app.use('/payment', paymentRoute);
 
 app.use(error);
 

@@ -1,5 +1,5 @@
 const paymentURL = process.env.PAYMENT_2C2P_URL;
-export const paymentService = {
+exports.paymentService = {
     pay: (payData) => {
         return new Promise((resolve, reject) => {
             fetch(`${paymentURL}`, {
