@@ -50,6 +50,11 @@ function RegisterForm() {
     const handleChangeInput = (e) => {
         // e.target.value;
         setError({});
+        if (e.target.name === 'mobile' || e.target.name === 'idNumber') {
+            if (isNaN(e.target.value)) {
+                return;
+            }
+        }
         setInput((prv) => ({ ...prv, [e.target.name]: e.target.value }));
     };
 
@@ -78,11 +83,14 @@ function RegisterForm() {
                             errorMsg={error.email}
                         ></Input>
                         <Input
+                            type={'string'}
                             onChange={handleChangeInput}
                             value={input.mobile}
                             name={'mobile'}
                             label={'Phone Number'}
                             errorMsg={error.mobile}
+                            maxLength={10}
+                            pattern='[0-9]{10}'
                         ></Input>
                     </div>
                     <Input
@@ -109,6 +117,7 @@ function RegisterForm() {
                         name={'idNumber'}
                         label={'เลขประชาชน'}
                         errorMsg={error.idNumber}
+                        maxLength={13}
                     ></Input>
 
                     {/* name */}
@@ -130,6 +139,11 @@ function RegisterForm() {
                     {/* gender */}
                     <div className='flex justify-between gap-4'>
                         <div className='w-1/2'>
+                            <div className='label'>
+                                <span className='label-text text-base max-sm:text-sm'>
+                                    เพศ
+                                </span>
+                            </div>
                             <Select
                                 onChange={handleChangeInput}
                                 value={input.gender}

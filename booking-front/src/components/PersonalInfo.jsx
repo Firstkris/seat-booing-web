@@ -204,6 +204,7 @@ function PersonalInfo({ setLoading }) {
                         label={'Phone Number'}
                         errorMsg={error.mobile}
                         disable={isDisable}
+                        pattern='0[0-9]{9}'
                     ></Input>
                 </div>
                 <Input
