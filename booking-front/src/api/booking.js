@@ -1,4 +1,3 @@
-import { data } from 'autoprefixer';
 import axios from '../config/axios';
 import { toast } from 'react-toastify';
 const URL = import.meta.env.VITE_API_URL;

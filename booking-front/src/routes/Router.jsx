@@ -1,70 +1,66 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import LoginPage from "../pages/LoginPage";
-import RegisterPage from "../pages/RegisterPage";
-import ProtectedRoute from "./ProtectedRoute";
-import SeatSelectPage from "../pages/SeatSelectPage";
-import PaymentPage from "../pages/PaymentPage";
-import SchedulePage from "../pages/SchedulePage";
-import RedirectRoute from "./RedirectRoute";
-import ProfilePage from "../pages/ProfilePage";
-import PassengerInfo from "../pages/PassengerInfo";
-import NavigatePage from "../pages/NavigatePage";
-import BookingContextProvider from "../context/BookingContext";
-import SummaryTicket from "../pages/SummaryTicket";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import HomePage from '../pages/HomePage';
+// import LoginPage from "../pages/LoginPage";
+import RegisterPage from '../pages/RegisterPage';
+import ProtectedRoute from './ProtectedRoute';
+import SeatSelectPage from '../pages/SeatSelectPage';
+import PaymentPage from '../pages/PaymentPage';
+import SchedulePage from '../pages/SchedulePage';
+import RedirectRoute from './RedirectRoute';
+import ProfilePage from '../pages/ProfilePage';
+import PassengerInfo from '../pages/PassengerInfo';
+import NavigatePage from '../pages/NavigatePage';
+import BookingContextProvider from '../context/BookingContext';
+import SummaryTicket from '../pages/SummaryTicket';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <HomePage />
+        element: <HomePage />,
     },
     {
         path: '/register',
         element: (
             <RedirectRoute>
                 <RegisterPage />
-            </RedirectRoute>)
+            </RedirectRoute>
+        ),
     },
     {
         path: '/schedule',
-        element: (
-            <SchedulePage />
-
-        )
+        element: <SchedulePage />,
     },
     {
         path: '/passenger-info',
         element: (
             <BookingContextProvider>
-                <ProtectedRoute >
+                <ProtectedRoute>
                     <PassengerInfo />
                 </ProtectedRoute>
             </BookingContextProvider>
-
-        )
-
+        ),
     },
 
     {
         path: '/seat-select',
         element: (
             <BookingContextProvider>
-                <ProtectedRoute >
+                <ProtectedRoute>
                     <SeatSelectPage />
                 </ProtectedRoute>
             </BookingContextProvider>
-        )
+        ),
     },
 
     {
         path: '/payment',
         element: (
             <BookingContextProvider>
-                <ProtectedRoute >
+                <ProtectedRoute>
                     <PaymentPage />
                 </ProtectedRoute>
             </BookingContextProvider>
-        )
+        ),
     },
 
     {
@@ -73,29 +69,24 @@ const router = createBrowserRouter([
             <BookingContextProvider>
                 <ProfilePage />
             </BookingContextProvider>
-
-        )
+        ),
     },
     {
         path: '/ticket',
         element: (
             <BookingContextProvider>
-                <ProtectedRoute >
+                <ProtectedRoute>
                     <SummaryTicket />
                 </ProtectedRoute>
             </BookingContextProvider>
-        )
+        ),
     },
     {
         path: '*',
-        element: (
-            <NavigatePage />
-        )
-    }
-
-
-])
+        element: <NavigatePage />,
+    },
+]);
 
 export default function Routes() {
-    return <RouterProvider router={router} />
+    return <RouterProvider router={router} />;
 }

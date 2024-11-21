@@ -197,6 +197,7 @@ function PersonalInfo({ setLoading }) {
                         disable={isDisable}
                     ></Input>
                     <Input
+                        type={'tel'}
                         onChange={handleChangeInput}
                         value={input.mobile}
                         name={'mobile'}
